@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv'
+dotenv.config()
 import prismaClient from "../../prisma";
 import {compare} from 'bcryptjs'
 import {sign} from 'jsonwebtoken'
