@@ -1,12 +1,12 @@
 require('dotenv')
 import * as dotenv from 'dotenv'
-dotenv.config()
 import express, {NextFunction, Request, Response}from 'express'
 import 'express-async-errors'
 import cors from 'cors'
 
 import {router} from './routes'
 const app = express()
+dotenv.config()
 app.use(express.json())
 app.use(cors())
 
