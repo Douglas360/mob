@@ -40,9 +40,7 @@ class AuthUserService{
             }
         })
             
-        if(!process.env.JWT_SECRET){
-            process.exit
-        }
+       
         const token = sign(
             {
                 nm_usuario: user.nm_usuario,
