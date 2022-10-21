@@ -25,7 +25,7 @@ export function auth(
     try {
         const {sub} =  verify(
             token, 
-            //process.env.JWT_SECRET
+          
             authConfig.secret
             
         ) as Payload
