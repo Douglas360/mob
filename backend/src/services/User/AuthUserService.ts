@@ -45,7 +45,8 @@ class AuthUserService{
             {
                 nm_usuario: user.nm_usuario,
                 email_usuario: user.email_usuario
-            },'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx',
+            },//process.env.JWT_SECRET
+            'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx',
             {                
                 expiresIn: '30d'
             }

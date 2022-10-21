@@ -25,7 +25,8 @@ export function auth(
     try {
         const {sub} =  verify(
             token, 
-            process.env.JWT_SECRET
+            //process.env.JWT_SECRET
+            'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx'
         ) as Payload
 
         //REcuperar o id do token e colocar em uma variavel req.id_user
