@@ -20,7 +20,8 @@ class CreateUserController {
     async verifyEmail(req, res) {
         try {
             const all = verify(req.params.token, 'k@')
-            const id = all["id_usuario"]
+            //const id = all["id_usuario"]
+            const id =1 //alterar depois
             const createUserService = new CreateUserService()
             await createUserService.update({
                 id
