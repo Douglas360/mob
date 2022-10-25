@@ -17,7 +17,7 @@ class CreateUserController {
         return res.json(user)
     }
     
-    async verifyEmail(req, res) {
+    async verifyEmail(req: Request, res: Response) {
         try {
             const all = verify(req.params.token, 'k@')
             //const id = all["id_usuario"]
