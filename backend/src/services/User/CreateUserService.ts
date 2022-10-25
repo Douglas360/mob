@@ -9,6 +9,10 @@ interface UserRequest {
     password: string
 }
 
+interface Verify{
+    id: number
+}
+
 class CreateUserService {
 
     async execute({ name, email, password }: UserRequest) {
@@ -76,7 +80,7 @@ class CreateUserService {
         return user
     }
 
-    async update({ id }) {
+    async update({ id }:Verify) {
 
 
         const verifyEmail = await prismaClient.user.update({
