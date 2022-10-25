@@ -37,11 +37,12 @@ model User{
   id_usuario Int @id @default(autoincrement())
   nm_usuario String
   email_usuario String
-  status_usuario Int @default(0)
+  status_usuario Int @default(1)
   password String
   dt_ultimo_login DateTime?
   dt_criacao DateTime @default(now())
   dt_atualizacao DateTime?
+  verificado Int @default(0)
   
  
   

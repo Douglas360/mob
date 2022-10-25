@@ -11,6 +11,7 @@ const router = Router()
 
 
 router.post('/create', new CreateUserController().handle)
+router.get('/confirmation/:token', new CreateUserController().verifyEmail)
 router.post('/session', new AuthUserController().handle)
 
 router.use(auth)
