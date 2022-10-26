@@ -24,8 +24,10 @@ model Jogo{
   minuto_jogo String
   time_casa String
   time_visitante String
-  result_ft String
-  result_ht_correct_score String
+  result_ft_casa String
+	result_ft_visitante String
+	result_ht_correct_score_casa String
+	result_ht_correct_score_visitante String
   //dt_atualizacao String
 
   ligas Liga @relation(fields: [id_liga], references: [id_liga])
