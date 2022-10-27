@@ -15,7 +15,10 @@ router.get('/confirmation/:token', new CreateUserController().verifyEmail)
 router.post('/session', new AuthUserController().handle)
 
 //router.use(auth)
-router.get('/result', new ListResultController().handle)
+router.get('/result/euro', new ListResultController().handle_euro)
+router.get('/result/copa', new ListResultController().handle_copa)
+router.get('/result/premier', new ListResultController().handle_premier)
+router.get('/result/super', new ListResultController().handle_super)
 
 
 
