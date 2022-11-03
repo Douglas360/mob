@@ -10,7 +10,7 @@ const date = year + "-" + month + "-" + day;
 
 
 class ListResultService {
-    async execute_euro(minuto) {
+    async execute_euro(minuto:String) {
         /*  const result = await prismaClient.jogo.findMany({
               take: 20,
               where: {
