@@ -28,7 +28,7 @@ model Jogo{
 	result_ft_visitante String
 	result_ht_correct_score_casa String
 	result_ht_correct_score_visitante String
-  //dt_atualizacao String
+  dt_atualizacao DateTime
 
   ligas Liga @relation(fields: [id_liga], references: [id_liga])
   @@map("t_jogo")
