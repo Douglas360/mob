@@ -9,36 +9,48 @@ class ListResultController {
 
         const listResultService = new ListResultService()
 
-        const result = await listResultService.execute_euro(minuto)
+        const result = await listResultService.execute(minuto,1)
 
         return res.json(result)
     }
 
     async handle_copa(req: Request, res: Response) {
+        const minuto = req.params.minuto
 
         const listResultService = new ListResultService()
 
-        const result = await listResultService.execute_copa()
+        const result = await listResultService.execute(minuto,2)
 
         return res.json(result)
     }
 
     async handle_premier(req: Request, res: Response) {
+        const minuto = req.params.minuto
 
         const listResultService = new ListResultService()
 
-        const result = await listResultService.execute_premier()
+        const result = await listResultService.execute(minuto,3)
 
         return res.json(result)
     }
 
     async handle_super(req: Request, res: Response) {
+        const minuto = req.params.minuto
 
         const listResultService = new ListResultService()
 
-        const result = await listResultService.execute_super()
+        const result = await listResultService.execute(minuto,4)
 
         return res.json(result)
+    }
+
+    async teste(req: Request, res: Response){
+        const listResultService = new ListResultService()
+
+        const result = await listResultService.teste()
+
+        return res.json(result)
+
     }
 
 

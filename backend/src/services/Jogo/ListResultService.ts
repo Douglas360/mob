@@ -1,65 +1,50 @@
-import { application } from 'express';
+import { getRedis, setRedis } from '../../middlewares/redisConfig';
 import prismaClient from '../../prisma'
-const datetime = new Date()
-//const day = ("0" + datetime.getDate()).slice(-2);
-var date_ob = new Date();
-var day = ("0" + date_ob.getDate()).slice(-2);
+
+var date_ob = new Date()
+
+var day = date_ob.getDate()
 var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 var year = date_ob.getFullYear();
-const date = year + "-" + month + "-" + day;
+
 
 
 class ListResultService {
-    async execute_euro(minuto:String) {
-        /*  const result = await prismaClient.jogo.findMany({
-              take: 20,
-              where: {
-                  AND: [
-                      {
-                          id_liga: 1
-                      },
-                      {
-                          minuto_jogo: {
-                              startsWith: minuto,
-                          }
-                      },
-                      
-                  ]
-  
-              },
-  
-              orderBy: {
-                  id_jogo: 'desc'
-              },
-              include: {
-                  ligas: true
-              },
-  
-  
-          })
-          console.log( datetime);*/
-      
-        
+
+    async execute(minuto: String, id_liga: number) {
         const result = await prismaClient.$queryRaw`
-        select * from t_jogo 
-            where (id_liga=1 
-            and minuto_jogo like ${`${minuto}%`} 
-            and DATEPART(yy, dt_atualizacao) = ${year}
-            and DATEPART(mm, dt_atualizacao) = ${month}
-            and	datepart(dd, dt_atualizacao)= ${day})
-            
-            order by id_jogo desc
-        
+        select top 20 * from t_jogo
+        where (id_liga=${id_liga}
+        and minuto_jogo like ${`${minuto}%`}
+        and dt_atualizacao >= '2022-11-18')
+
+        order by id_jogo desc 
         `
-        
+
+        /*  const result = await prismaClient.$queryRaw`
+              select top 20 * from t_jogo 
+                  where (id_liga=${id_liga}
+                  and minuto_jogo like ${`${minuto}%`} 
+                  and dt_atualizacao between '2022-11-16 00:00:00.000' and '11/17/2022 23:59:00.000')
+                  
+                  order by id_jogo desc
+              
+              `*/
+
+
+        await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
+
         return result
+
+
+
     }
 
-    async execute_copa() {
+    async teste() {
         const result = await prismaClient.jogo.findMany({
-            take: 480,
+            take: 60,
             where: {
-                id_liga: 2
+                id_liga: 1
             },
             orderBy: {
                 id_jogo: 'desc'
@@ -73,41 +58,21 @@ class ListResultService {
         return result
     }
 
-    async execute_premier() {
-        const result = await prismaClient.jogo.findMany({
-            take: 480,
-            where: {
-                id_liga: 3
-            },
-            orderBy: {
-                id_jogo: 'desc'
-            },
-            include: {
-                ligas: true
-            },
-
-
-        })
-        return result
-    }
-
-    async execute_super() {
-        const result = await prismaClient.jogo.findMany({
-            take: 480,
-            where: {
-                id_liga: 4
-            },
-            orderBy: {
-                id_jogo: 'desc'
-            },
-            include: {
-                ligas: true
-            },
-
-
-        })
-        return result
-    }
+    /*  const result = await prismaClient.jogo.findMany({
+          take: 480,
+          where: {
+              id_liga: 4
+          },
+          orderBy: {
+              id_jogo: 'desc'
+          },
+          include: {
+              ligas: true
+          },
+  
+  
+      })
+      return result*/
 }
 
 export { ListResultService }
