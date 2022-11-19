@@ -16,7 +16,7 @@ class ListResultService {
         select top 20 * from t_jogo
         where (id_liga=${id_liga}
         and minuto_jogo like ${`${minuto}%`}
-        and dt_atualizacao >= '2022-11-18')
+        and dt_atualizacao >= '2022-11-19')
 
         order by id_jogo desc 
         `
