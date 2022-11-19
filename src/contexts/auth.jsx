@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
     const [user, setUser] = useState(null)
-
+    const [load, setLoad] = useState(true)
     const [carregando, setCarregando] = useState(false)
 
     useEffect(() => {
@@ -37,10 +37,10 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await api.post('session', {
                 email,
-                password                
+                password
             })
-            
-             
+
+
             const usuariologado = response.data
             const token = response.data.token
 
@@ -127,17 +127,18 @@ export const AuthProvider = ({ children }) => {
 
     }
 
-    const createUser = async (nome, email, password) => {
+    const createUser = async ({ name, email, password }) => {
+        setLoad(false)
 
         try {
-            await api.post('register', {
-                nome,
+            await api.post('create', {
+                name,
                 email,
                 password
 
 
             }).then((response) => {
-                toast.success('Usuario Cadastrado com sucesso! ', {
+                toast.success('Validar Email para acessar o sistema ', {
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -150,8 +151,10 @@ export const AuthProvider = ({ children }) => {
                 navigate("/")
             })
 
-
+            setLoad(false)
         } catch (error) {
+            setLoad(false)
+            console.log(error)
             toast.error('Usuario já Cadastrado!', {
                 position: "top-center",
                 autoClose: 5000,
@@ -179,7 +182,7 @@ export const AuthProvider = ({ children }) => {
 
         <AuthContext.Provider value={{
             autenticado:
-                !!user, user, login, logout, createUser, carregando,
+                !!user, user, login, logout, createUser, carregando, load
         }}>
 
             {children}

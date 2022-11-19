@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { AuthProvider, AuthContext } from "../contexts/auth"
 import { Dashboard } from "../pages/Dashboard"
 import SignIn from "../pages/Login"
+import SignUp from "../pages/Login/register"
 
 
 
@@ -52,6 +53,7 @@ export const AppRouter = () => {
             <AuthProvider>
                 <Routes>
                     <Route path="/" exact element={<Autenticado><SignIn /></Autenticado>} />
+                    <Route path="/register" exact element={<Autenticado><SignUp /></Autenticado>} />
                     <Route path="/dashboard" exact element={<Private><Dashboard /></Private>} />
                     
                     
