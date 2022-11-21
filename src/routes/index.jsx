@@ -6,6 +6,8 @@ import { AuthProvider, AuthContext } from "../contexts/auth"
 import { Dashboard } from "../pages/Dashboard"
 import SignIn from "../pages/Login"
 import SignUp from "../pages/Login/register"
+import { UserProfile } from "../pages/Profile/UserProfile"
+import { UserSubscription } from "../pages/Profile/UserSubscription"
 
 
 
@@ -53,8 +55,10 @@ export const AppRouter = () => {
             <AuthProvider>
                 <Routes>
                     <Route path="/" exact element={<Autenticado><SignIn /></Autenticado>} />
-                    <Route path="/register" exact element={<Autenticado><SignUp /></Autenticado>} />
-                    <Route path="/dashboard" exact element={<Private><Dashboard /></Private>} />
+                    <Route path="/register"  element={<Autenticado><SignUp /></Autenticado>} />
+                    <Route path="/dashboard"  element={<Private><Dashboard /></Private>} />
+                    <Route path="/subscription"  element={<Private><UserSubscription /></Private>} />
+                    <Route path="/profile"  element={<Private><UserProfile /></Private>} />
                     
                     
                 </Routes>

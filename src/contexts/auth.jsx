@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
     const [user, setUser] = useState(null)
-    const [load, setLoad] = useState(true)
+    const [loadRegister, setLoadRegister] = useState(true)
     const [carregando, setCarregando] = useState(false)
 
     useEffect(() => {
@@ -18,12 +18,13 @@ export const AuthProvider = ({ children }) => {
         const recoveredUser = localStorage.getItem('user')
 
         const token = localStorage.getItem('token')
-
+        
         if (recoveredUser) {
             setUser(JSON.parse(recoveredUser))
             localStorage.setItem("token", token, {
                 path: "/"
             })
+            
 
 
         }
@@ -128,7 +129,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const createUser = async ({ name, email, password }) => {
-        setLoad(false)
+        setLoadRegister(false)
 
         try {
             await api.post('create', {
@@ -151,9 +152,9 @@ export const AuthProvider = ({ children }) => {
                 navigate("/")
             })
 
-            setLoad(false)
+            
         } catch (error) {
-            setLoad(false)
+            setLoadRegister(false)
             console.log(error)
             toast.error('Usuario já Cadastrado!', {
                 position: "top-center",
@@ -171,7 +172,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         api.defaults.headers.Authorization = null
-        console.log("Logout")
+        
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         setUser(null)
@@ -182,7 +183,7 @@ export const AuthProvider = ({ children }) => {
 
         <AuthContext.Provider value={{
             autenticado:
-                !!user, user, login, logout, createUser, carregando, load
+                !!user, user, login, logout, createUser, carregando, loadRegister
         }}>
 
             {children}

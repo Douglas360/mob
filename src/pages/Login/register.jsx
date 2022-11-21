@@ -21,7 +21,7 @@ const theme = createTheme();
 
 export default function SignUp() {
 
-    const { createUser, load } = useContext(AuthContext)
+    const { createUser, loadRegister } = useContext(AuthContext)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -129,7 +129,7 @@ export default function SignUp() {
                                 CADASTRAR
                             </Button>
 
-                            {!load &&
+                            {!loadRegister &&
                             <Loading />}
 
                             <Grid container>
