@@ -4,6 +4,14 @@ const nodemailer = require("nodemailer");
 import { sign } from 'jsonwebtoken'
 
 interface UserRequest {
+   
+    name: string
+    email: string
+    password: string
+}
+
+interface UserUpdate {
+    id:number
     name: string
     email: string
     password: string
@@ -96,6 +104,25 @@ class CreateUserService {
 
         return verifyEmail
 
+
+    }
+
+    async updateUser({id, name, email, password }: UserUpdate){
+        let date_update = new Date();
+        const passwordHash = await hash(password, 8)
+        const updateUser = await prismaClient.user.update({
+            where:{
+                id_usuario: id
+            },
+            data:{
+                nm_usuario:name,
+                email_usuario:email,
+                password:passwordHash,
+                dt_atualizacao:date_update
+            }
+        })
+
+        return updateUser
 
     }
 
