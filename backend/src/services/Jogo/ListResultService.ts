@@ -4,8 +4,9 @@ import prismaClient from '../../prisma'
 var date_ob = new Date()
 
 var day = date_ob.getDate()
-var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+var month = date_ob.getMonth()
 var year = date_ob.getFullYear();
+var today = `${year}-${month}-${day}`
 
 
 
@@ -16,7 +17,7 @@ class ListResultService {
         select top 20 * from t_jogo
         where (id_liga=${id_liga}
         and minuto_jogo like ${`${minuto}%`}
-        and dt_atualizacao >= '2022-11-19')
+        and dt_atualizacao >= ${`${today}`})
 
         order by id_jogo desc 
         `
@@ -32,8 +33,8 @@ class ListResultService {
               `*/
 
 
-      //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-
+        //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
+        console.log(today)
         return result
 
 

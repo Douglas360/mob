@@ -40,6 +40,7 @@ class CreateUserController {
         try {
             const { id_usuario, name, email, password } = req.body
             const id = Number(id_usuario)
+          
 
             const createUserService = new CreateUserService()
             const user = await createUserService.updateUser({
