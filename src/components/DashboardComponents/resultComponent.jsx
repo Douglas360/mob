@@ -1,4 +1,4 @@
-import { TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 import Table from '@mui/material/Table';
 import Paper from '@mui/material/Paper';
@@ -10,8 +10,22 @@ import { Under } from './Filtros/under';
 import { CasaMarca } from './Filtros/casaMarca';
 import { ForaMarca } from './Filtros/foraMarca';
 import { EmpateHT } from './Filtros/empateHT';
+import moment from "moment";
+
+
 
 export function ResultComponent(liga) {
+    const date_create = new Date()
+    const day = date_create.getDate()
+    const month = date_create.getMonth() + 1
+    const year = date_create.getFullYear()
+    const hour = date_create.getHours()
+    const minute = date_create.getMinutes()
+    const second = date_create.getSeconds()
+
+    const today = `${year}-${month}-${day} ${hour}:${minute}:${second}`
+
+    console.log(today)
 
 
     const column = [
@@ -39,8 +53,8 @@ export function ResultComponent(liga) {
     ]
 
 
-
     return (
+
 
         <div className="min-h-screen max-h-full max-w-full bg-dark-pn rounded-md m-2 p-2 text-center">
             <nav>
@@ -61,7 +75,6 @@ export function ResultComponent(liga) {
                                 ))}
                             </TableRow>
                         </TableHead>
-
                         <AmbasMarcamSim Liga={liga} Hora='23' />
                         <AmbasMarcamSim Liga={liga} Hora='22' />
                         <AmbasMarcamSim Liga={liga} Hora='21' />
@@ -85,6 +98,9 @@ export function ResultComponent(liga) {
                         <AmbasMarcamSim Liga={liga} Hora='3' />
                         <AmbasMarcamSim Liga={liga} Hora='2.' />
                         <AmbasMarcamSim Liga={liga} Hora='1.' />
+                        <AmbasMarcamSim Liga={liga} Hora='0.' />
+
+
 
                     </Table>
 

@@ -11,7 +11,9 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null)
     const [loadRegister, setLoadRegister] = useState(true)
-    const [carregando, setCarregando] = useState(false)
+    const [loadUpdate, setUpdate] = useState(false)
+    
+    
 
     useEffect(() => {
 
@@ -23,13 +25,12 @@ export const AuthProvider = ({ children }) => {
             setUser(JSON.parse(recoveredUser))
             localStorage.setItem("token", token, {
                 path: "/"
-            })
-            
+            })           
 
 
         }
 
-        setCarregando(true)
+       
     }, [])
 
 
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }) => {
             const usuariologado = response.data
             const token = response.data.token
 
-
+           
             localStorage.setItem("user", JSON.stringify(usuariologado))
             localStorage.setItem("token", token, {
                 path: "/"
@@ -170,6 +171,50 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+    const updateUser = async({ id_usuario, name, email, password })=>{
+        setUpdate(true)
+        const newUser = {id_usuario, name, email}
+        try {
+            await api.post('profile/update', {
+                id_usuario,
+                name,
+                email,
+                password
+
+
+            }).then((response) => {
+                localStorage.setItem("user", JSON.stringify(newUser))
+                setUpdate(false)
+                toast.success('Atualizado com sucesso ', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+                navigate("/profile")
+            })
+            
+        } catch (error) {
+            setUpdate(false)
+            console.log(error)
+            toast.error('Erro! Tente novamente', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            
+        }
+
+    }
+
     const logout = () => {
         api.defaults.headers.Authorization = null
         
@@ -183,8 +228,7 @@ export const AuthProvider = ({ children }) => {
 
         <AuthContext.Provider value={{
             autenticado:
-                !!user, user, login, logout, createUser, carregando, loadRegister
-        }}>
+                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate,}}>
 
             {children}
         </AuthContext.Provider>

@@ -42,13 +42,14 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
 
 export function AmbasMarcamSim(Liga) {
 
-
     const { data } = useFetch(`/result/${Liga.Liga.liga}/${Liga.Hora}`)
 
     return (
 
         <TableBody>
+
             {data?.length > 0 &&
+
                 <TableRow style={{ "width": "full" }} >
                     <StyledTableCellGray sx={{ backgroundColor: '#c1c1c1', textAlign: 'center' }}>{data[0].minuto_jogo.split(".")[0]}</StyledTableCellGray>
                     {data && data
@@ -109,8 +110,15 @@ export function AmbasMarcamSim(Liga) {
 
 
                         )}
+
                 </TableRow>
             }
+
         </TableBody>
+
+
+
     )
+
+
 }
