@@ -1,0 +1,147 @@
+import {
+  FormControlLabel,
+  FormGroup,
+  InputLabel,
+  NativeSelect,
+  Switch,
+  Typography,
+} from '@mui/material';
+
+export function FilterForm({ fields, setFields }) {
+  return (
+    <div className="flex flex-col justify-center  gap-2">
+      <div className="flex">
+        <FormGroup className="w-1/2 h-24 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
+          <Typography>Euro Cup</Typography>
+          <FormControlLabel
+            className="p-2"
+            control={
+              <Switch
+                size="big"
+                checked={fields.ligaSwitchChecked === 'euro'}
+                onChange={() =>
+                  setFields({ ...fields, ligaSwitchChecked: 'euro' })
+                }
+              />
+            }
+          />
+        </FormGroup>
+
+        <FormGroup className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
+          <Typography>Copa Do Mundo</Typography>
+          <FormControlLabel
+            className="p-2"
+            control={
+              <Switch
+                checked={fields.ligaSwitchChecked === 'copa'}
+                onChange={() =>
+                  setFields({ ...fields, ligaSwitchChecked: 'copa' })
+                }
+                size="big"
+              />
+            }
+          />
+        </FormGroup>
+
+        <FormGroup className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
+          <Typography>Premier</Typography>
+          <FormControlLabel
+            className="p-2"
+            control={
+              <Switch
+                checked={fields.ligaSwitchChecked === 'premier'}
+                onChange={() =>
+                  setFields({ ...fields, ligaSwitchChecked: 'premier' })
+                }
+                size="big"
+              />
+            }
+          />
+        </FormGroup>
+
+        <FormGroup className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
+          <Typography>Super Liga</Typography>
+          <FormControlLabel
+            className="p-2"
+            control={
+              <Switch
+                checked={fields.ligaSwitchChecked === 'super'}
+                onChange={() =>
+                  setFields({ ...fields, ligaSwitchChecked: 'super' })
+                }
+                size="big"
+              />
+            }
+          />
+        </FormGroup>
+      </div>
+
+      <div className="h-auto max-h-full bg-dark-pn rounded-md m-2 p-1 text-center">
+        <span className="text-center">Filtros</span>
+        <div className="text-left flex justify-center p-2">
+          <nav className="w-1/2 mr-4">
+            <InputLabel>Partidas</InputLabel>
+            <NativeSelect
+              value={fields.partidas}
+              onChange={e => setFields({ ...fields, partidas: e.target.value })}
+              inputProps={{
+                name: 'partidas',
+                id: 'uncontrolled-native',
+              }}
+            >
+              <option value={3}>Últimas 3 Horas</option>
+              <option value={6}>Últimas 6 Horas</option>
+              <option value={9}>Últimas 9 Horas</option>
+              <option value={12}>Últimas 12 Horas</option>
+              <option value={24}>Últimas 24 Horas</option>
+            </NativeSelect>
+          </nav>
+
+          <nav className="w-1/2">
+            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+              Mercados
+            </InputLabel>
+
+            <NativeSelect
+              value={fields.mercados}
+              onChange={e => setFields({ ...fields, mercados: e.target.value })}
+              inputProps={{
+                name: 'partidas',
+                id: 'uncontrolled-native',
+              }}
+            >
+              <optgroup label="Ambas Marcam">
+                <option value={'AMS'}>Ambas Marcam Sim</option>
+                <option value={'AMN'}>Ambas Marcam Não</option>
+              </optgroup>
+
+              <optgroup label="Empate">
+                <option value={'EHT'}>Empate HT</option>
+                <option value={'EFT'}>Empate FT</option>
+              </optgroup>
+
+              <optgroup label="Marca Gol">
+                <option value={'CM'}>Casa Marca</option>
+                <option value={'FM'}>Fora Marca</option>
+              </optgroup>
+
+              <optgroup label="Over">
+                <option value={'O05'}>Over 0,5</option>
+                <option value={'O15'}>Over 1,5</option>
+                <option value={'O25'}>Over 2,5</option>
+                <option value={'O35'}>Over 3,5</option>
+              </optgroup>
+
+              <optgroup label="Under">
+                <option value={'U05'}>Under 0,5</option>
+                <option value={'U15'}>Under 1,5</option>
+                <option value={'U25'}>Under 2,5</option>
+                <option value={'U35'}>Under 3,5</option>
+              </optgroup>
+            </NativeSelect>
+          </nav>
+        </div>
+      </div>
+    </div>
+  );
+}

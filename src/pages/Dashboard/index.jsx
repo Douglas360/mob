@@ -1,139 +1,87 @@
-import { useState } from 'react'
-
-import { FormControlLabel, FormGroup, Switch, Typography } from '@mui/material'
-
-import { Filtros } from '../../components/DashboardComponents'
-
-
-import { Header } from '../../components/LayoutComponents/Header'
-
-
-
+import { useEffect, useState } from 'react';
+import { Filtros } from '../../components/DashboardComponents';
+import { Header } from '../../components/LayoutComponents/Header';
+import { FilterForm } from '../../components/DashboardComponents/FilterForm';
+import { Table } from '../../components/DashboardComponents/Table';
+import { api } from '../../services/api';
 
 export function Dashboard() {
+  const [fields, setFields] = useState({
+    ligaSwitchChecked: 'euro',
+    partidas: 24,
+    mercados: 'AMS',
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [tableData, setTableData] = useState([]);
 
+  const fetchApiData = async liga => {
+    setIsLoading(true);
 
-    const [isChecked, setIschecked] = useState(true)
-    const [isCheckedCopa, setIscheckedCopa] = useState(false)
-    const [isCheckedPremier, setIscheckedPremier] = useState(false)
-    const [isCheckedSuper, setIscheckedSuper] = useState(false)
+    try {
+      const responses = await Promise.all([
+        api.get(`/result/${liga}/23`),
+        api.get(`/result/${liga}/22`),
+        api.get(`/result/${liga}/21`),
+        api.get(`/result/${liga}/20`),
+        api.get(`/result/${liga}/19`),
+        api.get(`/result/${liga}/18`),
+        api.get(`/result/${liga}/17`),
+        api.get(`/result/${liga}/16`),
+        api.get(`/result/${liga}/15`),
+        api.get(`/result/${liga}/14`),
+        api.get(`/result/${liga}/13`),
+        api.get(`/result/${liga}/12`),
+        api.get(`/result/${liga}/11`),
+        api.get(`/result/${liga}/10`),
+        api.get(`/result/${liga}/9`),
+        api.get(`/result/${liga}/8`),
+        api.get(`/result/${liga}/7`),
+        api.get(`/result/${liga}/6`),
+        api.get(`/result/${liga}/5`),
+        api.get(`/result/${liga}/4`),
+        api.get(`/result/${liga}/3`),
+        api.get(`/result/${liga}/2`),
+        api.get(`/result/${liga}/1`),
+      ]);
 
-
-
-
-    const handleChangeEuro = () => {
-        setIschecked(true)
-        setIscheckedCopa(false)
-        setIscheckedPremier(false)
-        setIscheckedSuper(false)
-
+      setTableData(
+        responses.map(response =>
+          response.data.sort((a, b) =>
+            new Date(a.dt_atualizacao) > new Date(b.dt_atualizacao) ? 1 : -1,
+          ),
+        ),
+      );
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    const handleChangeCopa = () => {
-        setIschecked(false)
-        setIscheckedPremier(false)
-        setIscheckedSuper(false)
-        setIscheckedCopa(true)
-
+  useEffect(() => {
+    if (fields.ligaSwitchChecked !== '') {
+      fetchApiData(fields.ligaSwitchChecked);
     }
+  }, [fields.ligaSwitchChecked]);
 
-    const handleChangePremier = () => {
-        setIschecked(false)
-        setIscheckedCopa(false)
-        setIscheckedSuper(false)
-        setIscheckedPremier(true)
+  return (
+    <div className="min-h-full ">
+      <Header />
+      <main>
+        <div className="container mx-auto max-w-full p-2 flex-col md:flex-row text-white">
+          <FilterForm fields={fields} setFields={setFields} />
 
-    }
+          <Table
+            items={tableData}
+            isLoading={isLoading}
+            liga={fields.ligaSwitchChecked}
+            mercados={fields.mercados}
+          />
 
-    const handleChangeSuper = () => {
-        setIschecked(false)
-        setIscheckedCopa(false)
-        setIscheckedPremier(false)
-        setIscheckedSuper(true)
-
-
-    }
-
-    return (
-
-        <div className="min-h-full ">
-            <Header />
-            <main>
-                <div className='container mx-auto max-w-full p-2 flex-col md:flex-row text-white'>
-
-                    <div className="flex justify-center " >
-
-                        <div className="w-1/2 h-24 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-                            <FormGroup>
-                                <Typography>Euro Cup</Typography>
-
-                                <FormControlLabel className="p-2" control={
-                                    <Switch size='big'
-                                        checked={isChecked}
-                                        onChange={handleChangeEuro} />
-                                } />
-
-                            </FormGroup>
-
-                        </div>
-
-                        <div className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-                            <FormGroup>
-                                <Typography>Copa Do Mundo</Typography>
-                                <FormControlLabel className="p-2" control={
-                                    <Switch
-                                        checked={isCheckedCopa}
-                                        onChange={handleChangeCopa}
-                                        size='big' />} />
-                            </FormGroup>
-                        </div>
-
-                        <div className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-                            <FormGroup>
-                                <Typography>Premier</Typography>
-                                <FormControlLabel className="p-2" control={
-                                    <Switch
-                                        checked={isCheckedPremier}
-                                        onChange={handleChangePremier}
-                                        size='big' />} />
-                            </FormGroup>
-                        </div>
-
-                        <div className="w-1/2  bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-                            <FormGroup>
-                                <Typography>Super Liga</Typography>
-                                <FormControlLabel className="p-2" control={
-                                    <Switch
-                                        checked={isCheckedSuper}
-                                        onChange={handleChangeSuper}
-                                        size='big' />} />
-                            </FormGroup>
-                        </div>
-
-                    </div>
-
-
-                    {isChecked === true &&
-                        <Filtros liga="euro" />
-                    }
-                    {isCheckedCopa === true &&
-                        <Filtros liga="copa" />
-                    }
-                    {isCheckedPremier === true &&
-                        <Filtros liga="premier" />
-                    }
-                    {isCheckedSuper === true &&
-                        <Filtros liga="super" />
-                    }
-
-
-                    <div>
-
-                    </div>
-                </div>
-            </main>
+          {fields.ligaSwitchChecked === 'euro-cup' && <Filtros liga="euro" />}
+          {fields.ligaSwitchChecked === 'copa' && <Filtros liga="copa" />}
+          {fields.ligaSwitchChecked === 'premier' && <Filtros liga="premier" />}
+          {fields.ligaSwitchChecked === 'super' && <Filtros liga="super" />}
         </div>
-
-
-    )
+      </main>
+    </div>
+  );
 }
