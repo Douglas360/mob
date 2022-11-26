@@ -15,7 +15,7 @@ router.get('/confirmation/:token', new CreateUserController().verifyEmail)
 router.post('/session', new AuthUserController().handle)
 router.post('/profile/update', new CreateUserController().updateUser)
 
-router.get('/result/euro', new ListResultController().teste)
+
 router.get('/result/euro/:minuto', new ListResultController().handle_euro)
 router.get('/result/copa/:minuto', new ListResultController().handle_copa)
 router.get('/result/premier/:minuto', new ListResultController().handle_premier)

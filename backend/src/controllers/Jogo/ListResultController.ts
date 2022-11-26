@@ -44,16 +44,7 @@ class ListResultController {
         return res.json(result)
     }
 
-    async teste(req: Request, res: Response){
-        const listResultService = new ListResultService()
-
-        const result = await listResultService.teste()
-
-        return res.json(result)
-
-    }
-
-
+  
 }
 
 export { ListResultController }
