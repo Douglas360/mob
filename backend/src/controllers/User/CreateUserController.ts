@@ -1,7 +1,12 @@
 import { Request, Response } from "express"
 import { CreateUserService } from "../../services/User/CreateUserService"
 import { verify } from 'jsonwebtoken'
+
+interface JwtPayload {
+    id_usuario: number
+  }
 class CreateUserController {
+    
 
     async handle(req: Request, res: Response) {
         const { name, email, password } = req.body
@@ -19,9 +24,8 @@ class CreateUserController {
 
     async verifyEmail(req: Request, res: Response) {
         try {
-            const all = verify(req.params.token, 'k@')
-            //const id = all["id_usuario"]
-            const id = 1 //alterar depois
+            const {id_usuario} = verify(req.params.token, 'k@') as JwtPayload
+            const id = id_usuario
             const createUserService = new CreateUserService()
             await createUserService.update({
                 id
