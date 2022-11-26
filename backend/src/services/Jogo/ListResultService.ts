@@ -5,7 +5,7 @@ import prismaClient from '../../prisma'
 var date_ob = new Date()
 
 var day = date_ob.getDate()
-var dayL = date_ob.getDate()-1
+var dayL = date_ob.getDate() - 1
 
 var month = date_ob.getMonth() + 1
 var year = date_ob.getFullYear();
@@ -39,7 +39,7 @@ class ListResultService {
 
 
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-        //console.log(today)
+        console.log(today)
         return result
 
 
