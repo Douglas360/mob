@@ -7,7 +7,7 @@ import moment from 'moment';
 var date_ob = new Date()
 
 var day = date_ob.getDate()
-var month = date_ob.getMonth()+1
+var month = date_ob.getMonth() + 1
 var year = date_ob.getFullYear();
 var today = `${year}-${month}-${day}`
 
@@ -16,16 +16,16 @@ var today = moment().format('YYYY-MM-DD h:m:s')
 class ListResultService {
 
     async execute(minuto: String, id_liga: number) {
-        const result = await prismaClient.$queryRaw`
-        select top 20 * from t_jogo
-        where (id_liga=${id_liga}
-        and minuto_jogo like ${`${minuto}%`}
-        and dt_atualizacao >='2022-11-25')
-
-        order by id_jogo desc 
-        `
-
         /*  const result = await prismaClient.$queryRaw`
+          select top 20 * from t_jogo
+          where (id_liga=${id_liga}
+          and minuto_jogo like ${`${minuto}%`}
+          and dt_atualizacao >='2022-11-25')
+  
+          order by id_jogo desc 
+          `*/
+
+        const result = await prismaClient.$queryRaw`
               select top 20 * from t_jogo 
                   where (id_liga=${id_liga}
                   and minuto_jogo like ${`${minuto}%`} 
@@ -33,11 +33,11 @@ class ListResultService {
                   
                   order by id_jogo desc
             
-              `*/
+              `
 
 
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-       console.log(today)
+        console.log(today)
         return result
 
 
