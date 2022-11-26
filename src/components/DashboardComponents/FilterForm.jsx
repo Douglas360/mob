@@ -1,145 +1,145 @@
 import {
+  FormControl,
   FormControlLabel,
   FormGroup,
-  InputLabel,
-  NativeSelect,
+  ListSubheader,
+  MenuItem,
+  Select,
   Switch,
-  Typography,
 } from '@mui/material';
 
 export function FilterForm({ fields, setFields }) {
   return (
-    <div className="flex flex-col justify-center  gap-2">
-      <div className="flex">
-        <FormGroup className="w-1/2 h-24 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-          <Typography>Euro Cup</Typography>
-          <FormControlLabel
-            className="p-2"
-            control={
-              <Switch
-                size="big"
-                checked={fields.ligaSwitchChecked === 'euro'}
-                onChange={() =>
-                  setFields({ ...fields, ligaSwitchChecked: 'euro' })
-                }
-              />
-            }
-          />
-        </FormGroup>
+    <div className="flex flex-col justify-center gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
+        <div className="flex flex-1 gap-4">
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+            <p className="text-white text-lg font-medium">Euro Cup</p>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="info"
+                  checked={fields.ligaSwitchChecked === 'euro'}
+                  onChange={() =>
+                    setFields({ ...fields, ligaSwitchChecked: 'euro' })
+                  }
+                />
+              }
+            />
+          </FormGroup>
 
-        <FormGroup className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-          <Typography>Copa Do Mundo</Typography>
-          <FormControlLabel
-            className="p-2"
-            control={
-              <Switch
-                checked={fields.ligaSwitchChecked === 'copa'}
-                onChange={() =>
-                  setFields({ ...fields, ligaSwitchChecked: 'copa' })
-                }
-                size="big"
-              />
-            }
-          />
-        </FormGroup>
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+            <p className="text-white text-lg font-medium">Copa Do Mundo</p>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="info"
+                  checked={fields.ligaSwitchChecked === 'copa'}
+                  onChange={() =>
+                    setFields({ ...fields, ligaSwitchChecked: 'copa' })
+                  }
+                />
+              }
+            />
+          </FormGroup>
+        </div>
 
-        <FormGroup className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-          <Typography>Premier</Typography>
-          <FormControlLabel
-            className="p-2"
-            control={
-              <Switch
-                checked={fields.ligaSwitchChecked === 'premier'}
-                onChange={() =>
-                  setFields({ ...fields, ligaSwitchChecked: 'premier' })
-                }
-                size="big"
-              />
-            }
-          />
-        </FormGroup>
+        <div className="flex flex-1 gap-4">
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+            <p className="text-white text-lg font-medium">Premier</p>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="info"
+                  checked={fields.ligaSwitchChecked === 'premier'}
+                  onChange={() =>
+                    setFields({ ...fields, ligaSwitchChecked: 'premier' })
+                  }
+                />
+              }
+            />
+          </FormGroup>
 
-        <FormGroup className="w-1/2 bg-slate-700 rounded-md p-1 mx-2 shadow-lg text-center">
-          <Typography>Super Liga</Typography>
-          <FormControlLabel
-            className="p-2"
-            control={
-              <Switch
-                checked={fields.ligaSwitchChecked === 'super'}
-                onChange={() =>
-                  setFields({ ...fields, ligaSwitchChecked: 'super' })
-                }
-                size="big"
-              />
-            }
-          />
-        </FormGroup>
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+            <p className="text-white text-lg font-medium">Super Liga</p>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="info"
+                  checked={fields.ligaSwitchChecked === 'super'}
+                  onChange={() =>
+                    setFields({ ...fields, ligaSwitchChecked: 'super' })
+                  }
+                />
+              }
+            />
+          </FormGroup>
+        </div>
       </div>
 
-      <div className="h-auto max-h-full bg-dark-pn rounded-md m-2 p-1 text-center">
-        <span className="text-center">Filtros</span>
-        <div className="text-left flex justify-center p-2">
-          <nav className="w-1/2 mr-4">
-            <InputLabel>Partidas</InputLabel>
-            <NativeSelect
+      <div className="bg-dark-pn rounded-md p-2 text-center">
+        <h3 className="text-white text-lg font-semibold">Filtros</h3>
+
+        <div className="flex flex-col gap-4 md:flex-row">
+          <FormControl size="small" className="items-start w-full md:w-1/5">
+            <label id="partidas" className="text-white mb-1">
+              Partidas
+            </label>
+            <Select
+              labelId="partidas"
+              id="partidas"
+              name="partidas"
+              className="bg-slate-600 w-full"
+              sx={{ color: 'white' }}
               value={fields.partidas}
               onChange={e => setFields({ ...fields, partidas: e.target.value })}
-              inputProps={{
-                name: 'partidas',
-                id: 'uncontrolled-native',
-              }}
             >
-              <option value={3}>Últimas 3 Horas</option>
-              <option value={6}>Últimas 6 Horas</option>
-              <option value={9}>Últimas 9 Horas</option>
-              <option value={12}>Últimas 12 Horas</option>
-              <option value={24}>Últimas 24 Horas</option>
-            </NativeSelect>
-          </nav>
+              <MenuItem value={3}>Últimas 3 Horas</MenuItem>
+              <MenuItem value={6}>Últimas 6 Horas</MenuItem>
+              <MenuItem value={9}>Últimas 9 Horas</MenuItem>
+              <MenuItem value={12}>Últimas 12 Horas</MenuItem>
+              <MenuItem value={24}>Últimas 24 Horas</MenuItem>
+            </Select>
+          </FormControl>
 
-          <nav className="w-1/2">
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          <FormControl size="small" className="items-start w-full md:w-1/5">
+            <label id="mercados" className="text-white mb-1">
               Mercados
-            </InputLabel>
-
-            <NativeSelect
+            </label>
+            <Select
+              labelId="mercados"
+              id="mercados"
+              name="mercados"
+              className="bg-slate-600 w-full"
+              sx={{ color: 'white' }}
               value={fields.mercados}
               onChange={e => setFields({ ...fields, mercados: e.target.value })}
-              inputProps={{
-                name: 'partidas',
-                id: 'uncontrolled-native',
-              }}
             >
-              <optgroup label="Ambas Marcam">
-                <option value={'AMS'}>Ambas Marcam Sim</option>
-                <option value={'AMN'}>Ambas Marcam Não</option>
-              </optgroup>
+              <ListSubheader>Ambas Marcam</ListSubheader>
+              <MenuItem value={'AMS'}>Ambas Marcam Sim</MenuItem>
+              <MenuItem value={'AMN'}>Ambas Marcam Não</MenuItem>
 
-              <optgroup label="Empate">
-                <option value={'EHT'}>Empate HT</option>
-                <option value={'EFT'}>Empate FT</option>
-              </optgroup>
+              <ListSubheader>Empate</ListSubheader>
+              <MenuItem value={'EHT'}>Empate HT</MenuItem>
+              <MenuItem value={'EFT'}>Empate FT</MenuItem>
 
-              <optgroup label="Marca Gol">
-                <option value={'CM'}>Casa Marca</option>
-                <option value={'FM'}>Fora Marca</option>
-              </optgroup>
+              <ListSubheader>Marca Gol</ListSubheader>
+              <MenuItem value={'CM'}>Casa Marca</MenuItem>
+              <MenuItem value={'FM'}>Fora Marca</MenuItem>
 
-              <optgroup label="Over">
-                <option value={'O05'}>Over 0,5</option>
-                <option value={'O15'}>Over 1,5</option>
-                <option value={'O25'}>Over 2,5</option>
-                <option value={'O35'}>Over 3,5</option>
-              </optgroup>
+              <ListSubheader>Over</ListSubheader>
+              <MenuItem value={'O05'}>Over 0,5</MenuItem>
+              <MenuItem value={'O15'}>Over 1,5</MenuItem>
+              <MenuItem value={'O25'}>Over 2,5</MenuItem>
+              <MenuItem value={'O35'}>Over 3,5</MenuItem>
 
-              <optgroup label="Under">
-                <option value={'U05'}>Under 0,5</option>
-                <option value={'U15'}>Under 1,5</option>
-                <option value={'U25'}>Under 2,5</option>
-                <option value={'U35'}>Under 3,5</option>
-              </optgroup>
-            </NativeSelect>
-          </nav>
+              <ListSubheader>Under</ListSubheader>
+              <MenuItem value={'U05'}>Under 0,5</MenuItem>
+              <MenuItem value={'U15'}>Under 1,5</MenuItem>
+              <MenuItem value={'U25'}>Under 2,5</MenuItem>
+              <MenuItem value={'U35'}>Under 3,5</MenuItem>
+            </Select>
+          </FormControl>
         </div>
       </div>
     </div>

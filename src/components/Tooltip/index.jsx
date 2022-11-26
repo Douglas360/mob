@@ -11,9 +11,9 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-export function Tooltip({ children, title }) {
+export function Tooltip({ children, title, placement }) {
   return (
-    <BootstrapTooltip placement="top-start" title={title}>
+    <BootstrapTooltip placement={placement} title={title}>
       {children}
     </BootstrapTooltip>
   );
