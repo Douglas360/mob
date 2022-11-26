@@ -1,19 +1,20 @@
 import { getRedis, setRedis } from '../../middlewares/redisConfig';
 import prismaClient from '../../prisma'
-import moment from 'moment';
-
 
 
 var date_ob = new Date()
 
-var day = date_ob.getDate()-1
+var day = date_ob.getDate()
+var dayL = date_ob.getDate()-1
 
 var month = date_ob.getMonth() + 1
 var year = date_ob.getFullYear();
-var yestarday = `${year}-${month}-${day}`
+var yesterday = `${year}-${month}-${dayL} 00:00:00`
+var today = `${year}-${month}-${day} 23:59:00`
 
 
-var today = moment().format('YYYY-MM-DD h:m:s')
+
+//var today = moment().format('YYYY-MM-DD h:m:s')
 class ListResultService {
 
     async execute(minuto: String, id_liga: number) {
@@ -30,7 +31,7 @@ class ListResultService {
               select top 20 * from t_jogo 
                   where (id_liga=${id_liga}
                   and minuto_jogo like ${`${minuto}%`} 
-                  and dt_atualizacao between '2022-11-24 00:00:00.000' and '2022-11-26 23:59:59.000')
+                  and dt_atualizacao between ${yesterday} and ${today})
                   
                   order by id_jogo desc
             
@@ -38,7 +39,7 @@ class ListResultService {
 
 
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-        console.log(yestarday)
+        //console.log(today)
         return result
 
 
