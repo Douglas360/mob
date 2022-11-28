@@ -7,7 +7,7 @@ export function AmbasMarcamSim({ rowData }) {
     return (
       <Tooltip title={<TooltipTitle row={rowData} />} placement="top-start">
         <TableCell background="green">
-          {rowData.result_ft_casa + 'x' + rowData.result_ft_visitante}
+          {rowData.result_ft_casa + '-' + rowData.result_ft_visitante}
         </TableCell>
       </Tooltip>
     );

@@ -19,10 +19,8 @@ export function FilterForm({ fields, setFields }) {
               control={
                 <Switch
                   color="info"
-                  checked={fields.ligaSwitchChecked === 'euro'}
-                  onChange={() =>
-                    setFields({ ...fields, ligaSwitchChecked: 'euro' })
-                  }
+                  checked={fields.liga === 'euro'}
+                  onChange={() => setFields({ ...fields, liga: 'euro' })}
                 />
               }
             />
@@ -34,10 +32,8 @@ export function FilterForm({ fields, setFields }) {
               control={
                 <Switch
                   color="info"
-                  checked={fields.ligaSwitchChecked === 'copa'}
-                  onChange={() =>
-                    setFields({ ...fields, ligaSwitchChecked: 'copa' })
-                  }
+                  checked={fields.liga === 'copa'}
+                  onChange={() => setFields({ ...fields, liga: 'copa' })}
                 />
               }
             />
@@ -51,10 +47,8 @@ export function FilterForm({ fields, setFields }) {
               control={
                 <Switch
                   color="info"
-                  checked={fields.ligaSwitchChecked === 'premier'}
-                  onChange={() =>
-                    setFields({ ...fields, ligaSwitchChecked: 'premier' })
-                  }
+                  checked={fields.liga === 'premier'}
+                  onChange={() => setFields({ ...fields, liga: 'premier' })}
                 />
               }
             />
@@ -66,10 +60,8 @@ export function FilterForm({ fields, setFields }) {
               control={
                 <Switch
                   color="info"
-                  checked={fields.ligaSwitchChecked === 'super'}
-                  onChange={() =>
-                    setFields({ ...fields, ligaSwitchChecked: 'super' })
-                  }
+                  checked={fields.liga === 'super'}
+                  onChange={() => setFields({ ...fields, liga: 'super' })}
                 />
               }
             />

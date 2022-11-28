@@ -11,15 +11,19 @@ export function TooltipTitle({ row }) {
       ) : (
         <p className="text-white text-lg font-medium">Time não encontrado</p>
       )}
-      <b>FT {row.result_ft === '- undefined' ? '' : row.result_ft}</b>
+      <strong className="text-white text-xs">
+        FT {row.result_ft === '- undefined' ? '' : row.result_ft}
+      </strong>
       <br />
-      <b>HT {row.result_ht_correct_score}</b>
+      <strong className="text-white text-xs">
+        HT {row.result_ht_correct_score || ''}
+      </strong>
       <br />
-      <em>{row.minuto_jogo}</em>
+      <em className="text-white text-xs">{row.minuto_jogo || ''}</em>
       <br />
-      <em>{row.minuto_jogo}</em>
-      <br />
-      <em>{dateFormatWithHours(row.dt_atualizacao) || ''}</em>
+      <em className="text-white text-xs">
+        {row.dt_atualizacao ? dateFormatWithHours(row.dt_atualizacao) : ''}
+      </em>
     </Fragment>
   );
 }

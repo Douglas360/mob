@@ -1,4 +1,6 @@
 export const sortItemsByMinutoJogo = items => {
+  if (!items) return [];
+
   // Hora atual + 3 - na API o minuto_jogo retorna em GMT 0;
   const hourNow = new Date().getHours() + 3;
 
