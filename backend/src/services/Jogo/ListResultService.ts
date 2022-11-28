@@ -39,7 +39,7 @@ class ListResultService {
 
 
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-        //console.log(today)
+        console.log(today)
         return result
 
 
