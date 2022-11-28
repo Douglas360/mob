@@ -38,7 +38,7 @@ model Jogo{
 model User{
   id_usuario Int @id @default(autoincrement())
   nm_usuario String
-  email_usuario String
+  email_usuario String @unique
   status_usuario Int @default(1)
   password String
   dt_ultimo_login DateTime?

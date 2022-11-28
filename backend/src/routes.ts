@@ -1,8 +1,10 @@
 import {Router, Request, Response} from 'express'
 
-import { ListResultController } from './controllers/Jogo/ListResultController'
+import { ForgotPasswordController } from './controllers/User/ForgotPasswordController'
 import { CreateUserController } from './controllers/User/CreateUserController'
+import { ListResultController } from './controllers/Jogo/ListResultController'
 import { AuthUserController } from './controllers/User/AuthUserController'
+
 
 
 import { auth } from './middlewares/auth'
@@ -10,10 +12,13 @@ import { auth } from './middlewares/auth'
 const router = Router()
 
 
-router.post('/create', new CreateUserController().handle)
+router.get('/forgot', new ForgotPasswordController().handle)
+router.post('/reset_password/:token', new ForgotPasswordController().resetPassword)
 router.get('/confirmation/:token', new CreateUserController().verifyEmail)
-router.post('/session', new AuthUserController().handle)
 router.post('/profile/update', new CreateUserController().updateUser)
+router.post('/create', new CreateUserController().handle)
+router.post('/session', new AuthUserController().handle)
+
 
 
 router.get('/result/euro/:minuto', new ListResultController().handle_euro)
