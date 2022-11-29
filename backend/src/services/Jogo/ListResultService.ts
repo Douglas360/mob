@@ -9,8 +9,11 @@ var dayL = date_ob.getDate() - 1
 
 var month = date_ob.getMonth() + 1
 var year = date_ob.getFullYear();
-var yesterday = `${year}-${month}-${dayL} 00:00:00`
+var hour = date_ob.getHours()+1
+var yesterday = `${year}-${month}-${dayL} ${hour}:05:00`
 var today = `${year}-${month}-${day} 23:59:00`
+
+
 
 
 
@@ -39,7 +42,7 @@ class ListResultService {
 
 
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-        //console.log(today)
+        //console.log(hour)
         return result
 
 
