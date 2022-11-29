@@ -10,7 +10,7 @@ var dayL = date_ob.getDate() - 1
 var month = date_ob.getMonth() + 1
 var year = date_ob.getFullYear();
 var hour = date_ob.getHours()+1
-var yesterday = `${year}-${month}-${dayL} ${hour}:05:00`
+var yesterday = `${year}-${month}-${dayL} 23:04:00`
 var today = `${year}-${month}-${day} 23:59:00`
 
 
