@@ -13,6 +13,12 @@ export const useMultipleRequests = urls => {
   const { data, error } = useSWR(
     urls.map(url => url),
     fetcher,
+    {
+      revalidateOnReconnect: true,
+      refreshWhenOffline: true,
+      revalidateIfStale: true,
+      refreshWhenHidden: true,
+    },
   );
 
   return {
