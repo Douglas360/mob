@@ -53,7 +53,7 @@ class ForgotPasswordService {
             });
             return "Email de reset enviado com sucesso para " + email
         } catch (error) {
-            return JSON.parse(error)
+           console.log(error)
         }
 
     }
