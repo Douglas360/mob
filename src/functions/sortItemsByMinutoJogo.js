@@ -26,8 +26,6 @@ export const sortItemsByMinutoJogo = items => {
     const minuto_jogo_a = a[0].minuto_jogo.split('.')[0].padStart(2, '0');
     const minuto_jogo_b = b[0].minuto_jogo.split('.')[0].padStart(2, '0');
 
-    console.log({ minuto_jogo_a, minuto_jogo_b, hour, hourNow });
-
     if (minuto_jogo_a < minuto_jogo_b) {
       if (minuto_jogo_a < hour && minuto_jogo_b < hour) {
         if (hour === '24' && minuto_jogo_a === '00') {
