@@ -38,8 +38,8 @@ export function Dashboard() {
     `/result/${fields.liga}/5`,
     `/result/${fields.liga}/4`,
     `/result/${fields.liga}/3`,
-    `/result/${fields.liga}/2`,
-    `/result/${fields.liga}/1`,
+    `/result/${fields.liga}/2.`,
+    `/result/${fields.liga}/1.`,
     `/result/${fields.liga}/0`,
   ]);
 
