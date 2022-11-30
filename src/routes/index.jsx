@@ -8,6 +8,7 @@ import SignIn from "../pages/Login"
 import SignUp from "../pages/Login/register"
 import { UserProfile } from "../pages/Profile/UserProfile"
 import { UserSubscription } from "../pages/Profile/UserSubscription"
+import ForgotPassword from "../pages/Login/forgotPassword"
 
 
 
@@ -16,22 +17,22 @@ export const AppRouter = () => {
 
     const Private = ({ children }) => {
         const { autenticado } = useContext(AuthContext)
-    /*    if (carregando) {
-            return (
-
-                <div className="carregando" align="center">
-                    <ColorRing
-                        visible={true}
-                        height="80"
-                        width="80"
-                        ariaLabel="blocks-loading"
-                        wrapperStyle={{}}
-                        wrapperClass="blocks-wrapper"
-                        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-                    />
-
-                </div>)
-        }*/
+        /*    if (carregando) {
+                return (
+    
+                    <div className="carregando" align="center">
+                        <ColorRing
+                            visible={true}
+                            height="80"
+                            width="80"
+                            ariaLabel="blocks-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="blocks-wrapper"
+                            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                        />
+    
+                    </div>)
+            }*/
 
         if (!autenticado) {
             return <Navigate to="/" />
@@ -55,12 +56,13 @@ export const AppRouter = () => {
             <AuthProvider>
                 <Routes>
                     <Route path="/" exact element={<Autenticado><SignIn /></Autenticado>} />
-                    <Route path="/register"  element={<Autenticado><SignUp /></Autenticado>} />
-                    <Route path="/dashboard"  element={<Private><Dashboard /></Private>} />
-                    <Route path="/subscription"  element={<Private><UserSubscription /></Private>} />
-                    <Route path="/profile"  element={<Private><UserProfile /></Private>} />
-                    
-                    
+                    <Route path="/register" element={<Autenticado><SignUp /></Autenticado>} />
+                    <Route path="/forgot" element={<Autenticado>< ForgotPassword /></Autenticado>} />
+                    <Route path="/dashboard" element={<Private><Dashboard /></Private>} />
+                    <Route path="/subscription" element={<Private><UserSubscription /></Private>} />
+                    <Route path="/profile" element={<Private><UserProfile /></Private>} />
+
+
                 </Routes>
             </AuthProvider>
         </Router>
