@@ -11,11 +11,11 @@ export function EmpateHT({ rowData }) {
     return (
       <Tooltip title={<TooltipTitle row={rowData} />} placement="top-start">
         <TableCell background="red">
-          {rowData.result_ft_casa === 'undef' ? 'X' : rowData.result_ft_casa}
+          {rowData.result_ht_correct_score_casa === 'undef' ? 'X' : rowData.result_ht_correct_score_casa}
           {'-'}
-          {rowData.result_ft_visitante === 'undef'
+          {rowData.result_ht_correct_score_visitante === 'undef'
             ? 'X'
-            : rowData.result_ft_visitante}
+            : rowData.result_ht_correct_score_visitante}
         </TableCell>
       </Tooltip>
     );
@@ -25,11 +25,7 @@ export function EmpateHT({ rowData }) {
     return (
       <Tooltip title={<TooltipTitle row={rowData} />}>
         <TableCell background="yellow">
-          {rowData.result_ft_casa === 'undef' ? 'X' : rowData.result_ft_casa}
-          {'-'}
-          {rowData.result_ft_visitante === 'undef'
-            ? 'X'
-            : rowData.result_ft_visitante}
+          {"Oth"}
         </TableCell>
       </Tooltip>
     );
@@ -38,11 +34,11 @@ export function EmpateHT({ rowData }) {
   return (
     <Tooltip title={<TooltipTitle row={rowData} />}>
       <TableCell background="green">
-        {rowData.result_ft_casa === 'undef' ? 'X' : rowData.result_ft_casa}
+        {rowData.result_ht_correct_score_casa === 'undef' ? 'X' : rowData.result_ht_correct_score_casa}
         {'-'}
-        {rowData.result_ft_visitante === 'undef'
+        {rowData.result_ht_correct_score_visitante === 'undef'
           ? 'X'
-          : rowData.result_ft_visitante}
+          : rowData.result_ht_correct_score_visitante}
       </TableCell>
     </Tooltip>
   );
