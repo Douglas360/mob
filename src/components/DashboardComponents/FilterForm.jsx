@@ -7,14 +7,19 @@ import {
   Select,
   Switch,
 } from '@mui/material';
+import eurocup from '../../assets/euro-cup.svg'
+import worldcup from '../../assets/world-cup.png'
+import premier from '../../assets/premier-league.svg'
+import superleague from '../../assets/sula.png'
 
 export function FilterForm({ fields, setFields }) {
   return (
-    <div className="flex flex-col justify-center gap-4">
+    <div className="flex flex-col justify-center gap-4 shadow-lg shadow-cyan-900">
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex flex-1 gap-4">
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <p className="text-white text-lg font-medium">Euro Cup</p>
+            <img className='w-20' src={eurocup} alt="Euro Cup" />
             <FormControlLabel
               control={
                 <Switch
@@ -26,8 +31,9 @@ export function FilterForm({ fields, setFields }) {
             />
           </FormGroup>
 
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <p className="text-white text-lg font-medium">Copa Do Mundo</p>
+            <img className='w-20' src={worldcup} alt="Copa Do Mundo" />
             <FormControlLabel
               control={
                 <Switch
@@ -41,8 +47,9 @@ export function FilterForm({ fields, setFields }) {
         </div>
 
         <div className="flex flex-1 gap-4">
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40 ">
             <p className="text-white text-lg font-medium">Premier</p>
+            <img className='w-20' src={premier} alt="Premier" />
             <FormControlLabel
               control={
                 <Switch
@@ -54,8 +61,9 @@ export function FilterForm({ fields, setFields }) {
             />
           </FormGroup>
 
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg">
+          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <p className="text-white text-lg font-medium">Super Liga</p>
+            <img className='w-20' src={superleague} alt="Super Liga" />
             <FormControlLabel
               control={
                 <Switch

@@ -9,7 +9,10 @@ import { Header } from '../../components/LayoutComponents/Header';
 import { Table } from '../../components/DashboardComponents/Table/Table';
 import { FilterForm } from '../../components/DashboardComponents/FilterForm';
 
+
+
 export function Dashboard() {
+  
   const [fields, setFields] = useState({
     liga: 'euro',
     partidas: 24,
@@ -44,13 +47,13 @@ export function Dashboard() {
   ]);
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-full ">
       <Header />
-      <main>
-        <div className="flex flex-col max-w-full p-4 gap-4 text-white">
+      <main className='max-w-7xl mr-auto ml-auto'>
+        <div className="flex flex-col  p-4 gap-4 text-white " >
           <FilterForm fields={fields} setFields={setFields} />
 
-          <div className="min-h-screen max-h-full max-w-full bg-dark-pn rounded-md p-2 text-center">
+          <div className="min-h-screen max-h-full max-w-full bg-dark-pn rounded-md pt-2 pl-10 pr-10 pb-3 text-center shadow-lg shadow-cyan-900">
             {isLoading ? (
               <Loading className="mt-4" />
             ) : (
