@@ -27,8 +27,8 @@ class ForgotPasswordService {
                 port: 587,
                 secure: false,
                 auth: {
-                    user: 'douglas@magicti.com', // generated ethereal user
-                    pass: 'a12345@@' // generated ethereal password
+                    user: '', // generated ethereal user
+                    pass: '' // generated ethereal password
                 },
             });
 
