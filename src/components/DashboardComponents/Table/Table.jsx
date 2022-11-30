@@ -56,6 +56,8 @@ export function Table({ items, liga, mercados, partidas }) {
               sortedItemsByPartidas.map((item, rowIndex) => {
                 const minuto = item[0]?.minuto_jogo?.split('.')[0];
 
+                if (!minuto) return null;
+
                 // Ordena os items das linhas da tabela referente ao minuto jogo
                 const rowItems = item.sort((a, b) =>
                   a.minuto_jogo > b.minuto_jogo ? 1 : -1,

@@ -7,73 +7,81 @@ import {
   Select,
   Switch,
 } from '@mui/material';
-import eurocup from '../../assets/euro-cup.svg'
-import worldcup from '../../assets/world-cup.png'
-import premier from '../../assets/premier-league.svg'
-import superleague from '../../assets/sula.png'
+import eurocup from '../../assets/euro-cup.svg';
+import worldcup from '../../assets/world-cup.png';
+import premier from '../../assets/premier-league.svg';
+import superleague from '../../assets/sula.png';
 
 export function FilterForm({ fields, setFields }) {
   return (
-    <div className="flex flex-col justify-center gap-4 shadow-lg shadow-cyan-900">
+    <div className="flex flex-col justify-center gap-4 shadow-lg">
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex flex-1 gap-4">
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
-            <p className="text-white text-lg font-medium">Euro Cup</p>
-            <img className='w-20' src={eurocup} alt="Euro Cup" />
-            <FormControlLabel
-              control={
-                <Switch
-                  color="info"
-                  checked={fields.liga === 'euro'}
-                  onChange={() => setFields({ ...fields, liga: 'euro' })}
-                />
-              }
-            />
-          </FormGroup>
+          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+            <FormGroup>
+              <p className="text-white text-lg font-medium">Euro Cup</p>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="info"
+                    checked={fields.liga === 'euro'}
+                    onChange={() => setFields({ ...fields, liga: 'euro' })}
+                  />
+                }
+              />
+            </FormGroup>
+            <img src={eurocup} alt="Euro Cup" className="w-20 h-20" />
+          </div>
 
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
-            <p className="text-white text-lg font-medium">Copa Do Mundo</p>
-            <img className='w-20' src={worldcup} alt="Copa Do Mundo" />
-            <FormControlLabel
-              control={
-                <Switch
-                  color="info"
-                  checked={fields.liga === 'copa'}
-                  onChange={() => setFields({ ...fields, liga: 'copa' })}
-                />
-              }
-            />
-          </FormGroup>
+          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+            <FormGroup>
+              <p className="text-white text-lg font-medium">Copa Do Mundo</p>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="info"
+                    checked={fields.liga === 'copa'}
+                    onChange={() => setFields({ ...fields, liga: 'copa' })}
+                  />
+                }
+              />
+            </FormGroup>
+            <img src={worldcup} alt="Copa Do Mundo" className="w-20 h-24" />
+          </div>
         </div>
 
         <div className="flex flex-1 gap-4">
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40 ">
-            <p className="text-white text-lg font-medium">Premier</p>
-            <img className='w-20' src={premier} alt="Premier" />
-            <FormControlLabel
-              control={
-                <Switch
-                  color="info"
-                  checked={fields.liga === 'premier'}
-                  onChange={() => setFields({ ...fields, liga: 'premier' })}
-                />
-              }
-            />
-          </FormGroup>
+          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+            <FormGroup>
+              <p className="text-white text-lg font-medium">Premier</p>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="info"
+                    checked={fields.liga === 'premier'}
+                    onChange={() => setFields({ ...fields, liga: 'premier' })}
+                  />
+                }
+              />
+            </FormGroup>
+            <img src={premier} alt="Premier" className="w-16 h-16" />
+          </div>
 
-          <FormGroup className="flex-1 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
-            <p className="text-white text-lg font-medium">Super Liga</p>
-            <img className='w-20' src={superleague} alt="Super Liga" />
-            <FormControlLabel
-              control={
-                <Switch
-                  color="info"
-                  checked={fields.liga === 'super'}
-                  onChange={() => setFields({ ...fields, liga: 'super' })}
-                />
-              }
-            />
-          </FormGroup>
+          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+            <FormGroup>
+              <p className="text-white text-lg font-medium">Super Liga</p>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="info"
+                    checked={fields.liga === 'super'}
+                    onChange={() => setFields({ ...fields, liga: 'super' })}
+                  />
+                }
+              />
+            </FormGroup>
+            <img src={superleague} alt="Super Liga" className="w-24 h-20" />
+          </div>
         </div>
       </div>
 
