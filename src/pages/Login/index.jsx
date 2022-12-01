@@ -56,11 +56,10 @@ export default function SignIn() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random)',
+                        backgroundImage: 'url(http://localhost:3000/static/media/logo.c348e004ed178a7c2b62.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
+                             t.palette.grey[900],                        
                         backgroundPosition: 'center',
                     }}
                 />
@@ -118,7 +117,7 @@ export default function SignIn() {
                             </Button>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2">
+                                    <Link href="/forgot" variant="body2">
                                         Esqueceu a senha?
                                     </Link>
                                 </Grid>

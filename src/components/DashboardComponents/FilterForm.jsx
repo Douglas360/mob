@@ -17,7 +17,7 @@ export function FilterForm({ fields, setFields }) {
     <div className="flex flex-col justify-center gap-4 shadow-lg">
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex flex-1 gap-4">
-          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+          <div className="flex flex-1 items-center justify-between h-24 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <FormGroup>
               <p className="text-white text-lg font-medium">Euro Cup</p>
               <FormControlLabel
@@ -33,7 +33,7 @@ export function FilterForm({ fields, setFields }) {
             <img src={eurocup} alt="Euro Cup" className="w-20 h-20" />
           </div>
 
-          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+          <div className="flex flex-1 items-center justify-betweenh-24 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <FormGroup>
               <p className="text-white text-lg font-medium">Copa Do Mundo</p>
               <FormControlLabel
@@ -46,12 +46,12 @@ export function FilterForm({ fields, setFields }) {
                 }
               />
             </FormGroup>
-            <img src={worldcup} alt="Copa Do Mundo" className="w-20 h-24" />
+            <img src={worldcup} alt="Copa Do Mundo" className="w-20 h-20" />
           </div>
         </div>
 
         <div className="flex flex-1 gap-4">
-          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+          <div className="flex flex-1 items-center justify-between h-24 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <FormGroup>
               <p className="text-white text-lg font-medium">Premier</p>
               <FormControlLabel
@@ -67,7 +67,7 @@ export function FilterForm({ fields, setFields }) {
             <img src={premier} alt="Premier" className="w-16 h-16" />
           </div>
 
-          <div className="flex flex-1 items-center justify-between bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+          <div className="flex flex-1 items-center justify-between h-24 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <FormGroup>
               <p className="text-white text-lg font-medium">Super Liga</p>
               <FormControlLabel
