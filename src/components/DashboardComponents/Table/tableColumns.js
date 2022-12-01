@@ -21,6 +21,7 @@ export const tableColumns = {
     { id: 19, value: 53 },
     { id: 20, value: 56 },
     { id: 21, value: 59 },
+    { id: 22, value: 'Dados' },
   ],
   copa: [
     { id: 1, value: 'Hora' },
@@ -44,6 +45,7 @@ export const tableColumns = {
     { id: 19, value: 52 },
     { id: 20, value: 55 },
     { id: 21, value: 58 },
+    { id: 22, value: 'Dados' },
   ],
   premier: [
     { id: 1, value: 'Hora' },
@@ -67,6 +69,7 @@ export const tableColumns = {
     { id: 19, value: 51 },
     { id: 20, value: 54 },
     { id: 21, value: 57 },
+    { id: 22, value: 'Dados' },
   ],
   super: [
     { id: 1, value: 'Hora' },
@@ -90,5 +93,6 @@ export const tableColumns = {
     { id: 19, value: 52 },
     { id: 20, value: 55 },
     { id: 21, value: 58 },
+    { id: 22, value: 'Dados' },
   ],
 };

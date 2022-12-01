@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useMultipleRequests } from '../../hooks/useMultipleRequests';
-import { sortItemsByMinutoJogo } from '../../functions/sortItemsByMinutoJogo';
+import { formatTableData } from '../../functions/formatTableData';
 
 import { Loading } from '../../components/Loading';
 import { ErrorMessage } from '../../components/ErrorMessage';
@@ -9,10 +9,7 @@ import { Header } from '../../components/LayoutComponents/Header';
 import { Table } from '../../components/DashboardComponents/Table/Table';
 import { FilterForm } from '../../components/DashboardComponents/FilterForm';
 
-
-
 export function Dashboard() {
-  
   const [fields, setFields] = useState({
     liga: 'euro',
     partidas: 24,
@@ -49,8 +46,8 @@ export function Dashboard() {
   return (
     <div className="min-h-full ">
       <Header />
-      <main className='max-w-7xl mr-auto ml-auto'>
-        <div className="flex flex-col  p-4 gap-4 text-white " >
+      <main className="max-w-7xl mr-auto ml-auto">
+        <div className="flex flex-col  p-4 gap-4 text-white ">
           <FilterForm fields={fields} setFields={setFields} />
 
           <div className="min-h-screen max-h-full max-w-full bg-dark-pn rounded-md pt-2 pl-10 pr-10 pb-3 text-center shadow-lg shadow-cyan-900">
@@ -62,7 +59,7 @@ export function Dashboard() {
                   <ErrorMessage className="mt-4" error={error} />
                 ) : (
                   <Table
-                    items={sortItemsByMinutoJogo(data)}
+                    items={formatTableData(data, fields.mercados)}
                     liga={fields.liga}
                     mercados={fields.mercados}
                     partidas={fields.partidas}
