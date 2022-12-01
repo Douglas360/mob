@@ -16,7 +16,6 @@ var today = `${year}-${month}-${day} 23:59:00`
 
 
 
-
 //var today = moment().format('YYYY-MM-DD h:m:s')
 class ListResultService {
 
@@ -34,7 +33,8 @@ class ListResultService {
               select top 20 * from t_jogo 
                   where (id_liga=${id_liga}
                   and minuto_jogo like ${`${minuto}%`} 
-                  and dt_atualizacao between ${yesterday} and ${today})
+                  /*and dt_atualizacao between ${yesterday} and ${today})*/
+                  and dt_atualizacao between '2022-11-30 11:04:00' and '2022-12-1 23:59:59')
                   
                   order by id_jogo desc
             
@@ -42,28 +42,13 @@ class ListResultService {
 
 
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-        //console.log(hour)
+        //console.log(yesterday)
         return result
 
 
 
     }
 
-    /*  const result = await prismaClient.jogo.findMany({
-      take: 480,
-      where: {
-          id_liga: 4
-      },
-      orderBy: {
-          id_jogo: 'desc'
-      },
-      include: {
-          ligas: true
-      },
- 
- 
-  })
-  return result*/
 }
 
 export { ListResultService }
