@@ -1,23 +1,23 @@
-import { useContext } from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
-
-import { AuthProvider, AuthContext } from "../contexts/auth"
-import { Dashboard } from "../pages/Dashboard"
-import SignIn from "../pages/Login"
-import SignUp from "../pages/Login/register"
-import { UserProfile } from "../pages/Profile/UserProfile"
-import { UserSubscription } from "../pages/Profile/UserSubscription"
-import ForgotPassword from "../pages/Login/forgotPassword"
-
-
-
+import { AuthProvider, AuthContext } from '../contexts/auth';
+import { Dashboard } from '../pages/Dashboard';
+import SignIn from '../pages/Login';
+import SignUp from '../pages/Login/register';
+import { UserProfile } from '../pages/Profile/UserProfile';
+import { UserSubscription } from '../pages/Profile/UserSubscription';
+// import ForgotPassword from '../pages/Login/forgotPassword';
 
 export const AppRouter = () => {
-
-    const Private = ({ children }) => {
-        const { autenticado } = useContext(AuthContext)
-        /*    if (carregando) {
+  const Private = ({ children }) => {
+    const { autenticado } = useContext(AuthContext);
+    /*    if (carregando) {
                 return (
     
                     <div className="carregando" align="center">
@@ -34,39 +34,76 @@ export const AppRouter = () => {
                     </div>)
             }*/
 
-        if (!autenticado) {
-            return <Navigate to="/" />
-        }
-
-        return children
-
+    if (!autenticado) {
+      return <Navigate to="/" />;
     }
 
-    const Autenticado = ({ children }) => {
-        const token = localStorage.getItem("token")
-        if (token) {
-            return <Navigate to="dashboard" />
-        }
-        return children
+    return children;
+  };
 
+  const Autenticado = ({ children }) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return <Navigate to="dashboard" />;
     }
+    return children;
+  };
 
-    return (
-        <Router>
-            <AuthProvider>
-                <Routes>
-                    <Route path="/" exact element={<Autenticado><SignIn /></Autenticado>} />
-                    <Route path="/register" element={<Autenticado><SignUp /></Autenticado>} />
-                    <Route path="/forgot" element={<Autenticado>< ForgotPassword /></Autenticado>} />
-                    <Route path="/dashboard" element={<Private><Dashboard /></Private>} />
-                    <Route path="/subscription" element={<Private><UserSubscription /></Private>} />
-                    <Route path="/profile" element={<Private><UserProfile /></Private>} />
-
-
-                </Routes>
-            </AuthProvider>
-        </Router>
-    )
-}
-
-
+  return (
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <Autenticado>
+                <SignIn />
+              </Autenticado>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <Autenticado>
+                <SignUp />
+              </Autenticado>
+            }
+          />
+          {/* <Route
+            path="/forgot"
+            element={
+              <Autenticado>
+                <ForgotPassword />
+              </Autenticado>
+            }
+          /> */}
+          <Route
+            path="/dashboard"
+            element={
+              <Private>
+                <Dashboard />
+              </Private>
+            }
+          />
+          <Route
+            path="/subscription"
+            element={
+              <Private>
+                <UserSubscription />
+              </Private>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Private>
+                <UserProfile />
+              </Private>
+            }
+          />
+        </Routes>
+      </AuthProvider>
+    </Router>
+  );
+};
