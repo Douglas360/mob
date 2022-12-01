@@ -4,16 +4,13 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { SmileySad } from 'phosphor-react';
 import { tableColumns } from './tableColumns';
-import { sortItemsByPartidas } from '../../../functions/sortItemsByPartidas';
 
-import { Over } from './TableRows/Over';
-import { Under } from './TableRows/Under';
-import { EmpateHT } from './TableRows/EmpateHT';
-import { CasaMarca } from './TableRows/CasaMarca';
-import { ForaMarca } from './TableRows/ForaMarca';
-import { AmbasMarcamNao } from './TableRows/AmbasMarcamNao';
-import { AmbasMarcamSim } from './TableRows/AmbasMarcamSim';
+import { Tooltip } from '../../Tooltip';
+import { TableCell } from './TableCell';
+import { TooltipTitle } from '../TooltipTitle';
+import { TotalPercentage } from './TotalPercentage';
 
 export function Table({ items, liga, mercados, partidas }) {
   const ligaLabels = {
@@ -23,16 +20,11 @@ export function Table({ items, liga, mercados, partidas }) {
     super: 'Super Liga',
   };
 
-  const sortedItemsByPartidas =
-    items && items.length > 0 && sortItemsByPartidas(items, partidas);
+  const itemsByPartidas = partidas === 24 ? items : items.slice(0, partidas);
 
   return (
     <>
-      <div className="flex gap-1 justify-center">
-        <span className="bg-red-600 rounded-lg p-0.5 mx-1 shadow-lg">50%</span>
-        <p className="text-lg">{ligaLabels[liga]}</p>
-        <span className="bg-green-600 rounded-lg p-0.5 mx-1">50%</span>
-      </div>
+      <TotalPercentage items={itemsByPartidas} liga={ligaLabels[liga]} />
 
       <div className="mt-4 max-w-full rounded overflow-x-auto">
         <MUITable className="max-w-full" size="small">
@@ -42,7 +34,7 @@ export function Table({ items, liga, mercados, partidas }) {
                 <th
                   key={row.id}
                   align="center"
-                  className="bg-slate-800 text-white border border-solid border-black font-medium"
+                  className="bg-slate-800 text-white p-1 border border-solid border-black font-medium"
                 >
                   {row.value}
                 </th>
@@ -51,17 +43,32 @@ export function Table({ items, liga, mercados, partidas }) {
           </TableHead>
 
           <TableBody>
-            {sortedItemsByPartidas &&
-              sortedItemsByPartidas.length > 0 &&
-              sortedItemsByPartidas.map((item, rowIndex) => {
-                const minuto = item[0]?.minuto_jogo?.split('.')[0];
+            {itemsByPartidas &&
+              itemsByPartidas.length > 0 &&
+              itemsByPartidas.map((sortedItems, rowIndex) => {
+                const minuto = sortedItems[0]?.minuto_jogo?.split('.')[0];
 
                 if (!minuto) return null;
 
                 // Ordena os items das linhas da tabela referente ao minuto jogo
-                const rowItems = item.sort((a, b) =>
+                const rowItems = sortedItems.sort((a, b) =>
                   a.minuto_jogo > b.minuto_jogo ? 1 : -1,
                 );
+
+                const totalRed = rowItems.reduce(
+                  (prev, curr) =>
+                    prev + Number(curr.background === 'red' ? 1 : 0),
+                  0,
+                );
+                const totalGreen = rowItems.reduce(
+                  (prev, curr) =>
+                    prev + Number(curr.background === 'green' ? 1 : 0),
+                  0,
+                );
+
+                const percentage = Number(
+                  (totalGreen / (totalRed + totalGreen)) * 100,
+                ).toFixed(0);
 
                 return (
                   <TableRow key={`table-row-${rowIndex}`}>
@@ -69,129 +76,66 @@ export function Table({ items, liga, mercados, partidas }) {
                       {minuto.length < 4 ? minuto.padStart(2, '0') : minuto}
                     </td>
 
-                    {mercados === 'AMS' &&
-                      rowItems.map((rowData, index) => (
-                        <AmbasMarcamSim
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                        />
-                      ))}
+                    {rowItems.map((rowData, index) => {
+                      if (rowData?.isEmpty) {
+                        return (
+                          <Tooltip
+                            key={index}
+                            title={<TooltipTitle row={rowData} />}
+                          >
+                            <TableCell background={rowData.background}>
+                              <SmileySad className="mx-auto" size={20} />
+                            </TableCell>
+                          </Tooltip>
+                        );
+                      }
 
-                    {mercados === 'AMN' &&
-                      rowItems.map((rowData, index) => (
-                        <AmbasMarcamNao
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                        />
-                      ))}
+                      if (mercados === 'EHT') {
+                        return (
+                          <Tooltip
+                            key={index}
+                            title={<TooltipTitle row={rowData} />}
+                          >
+                            {rowData.time_casa ? (
+                              <TableCell background={rowData.background}>
+                                {rowData.result_ht_correct_score}
+                              </TableCell>
+                            ) : (
+                              <TableCell
+                                background={
+                                  rowData.result_ht_correct_score === 'Oth'
+                                    ? 'yellow'
+                                    : rowData.background
+                                }
+                              >
+                                {rowData.result_ht_correct_score}
+                              </TableCell>
+                            )}
+                          </Tooltip>
+                        );
+                      }
 
-                    {mercados === 'O05' &&
-                      rowItems.map((rowData, index) => (
-                        <Over
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={0.5}
-                        />
-                      ))}
+                      return (
+                        <Tooltip
+                          key={index}
+                          title={<TooltipTitle row={rowData} />}
+                        >
+                          <TableCell background={rowData.background}>
+                            {rowData.result_ft?.includes('undefined')
+                              ? '-'
+                              : rowData.result_ft}
+                          </TableCell>
+                        </Tooltip>
+                      );
+                    })}
 
-                    {mercados === 'O15' &&
-                      rowItems.map((rowData, index) => (
-                        <Over
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={1.5}
-                        />
-                      ))}
-
-                    {mercados === 'O25' &&
-                      rowItems.map((rowData, index) => (
-                        <Over
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={2.5}
-                        />
-                      ))}
-
-                    {mercados === 'O35' &&
-                      rowItems.map((rowData, index) => (
-                        <Over
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={3.5}
-                        />
-                      ))}
-
-                    {mercados === 'U05' &&
-                      rowItems.map((rowData, index) => (
-                        <Under
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={0.5}
-                        />
-                      ))}
-
-                    {mercados === 'U15' &&
-                      rowItems.map((rowData, index) => (
-                        <Under
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={1.5}
-                        />
-                      ))}
-
-                    {mercados === 'U25' &&
-                      rowItems.map((rowData, index) => (
-                        <Under
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={2.5}
-                        />
-                      ))}
-
-                    {mercados === 'U35' &&
-                      rowItems.map((rowData, index) => (
-                        <Under
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={3.5}
-                        />
-                      ))}
-
-                    {mercados === 'CM' &&
-                      rowItems.map((rowData, index) => (
-                        <CasaMarca
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={3.5}
-                        />
-                      ))}
-
-                    {mercados === 'FM' &&
-                      rowItems.map((rowData, index) => (
-                        <ForaMarca
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={3.5}
-                        />
-                      ))}
-
-                    {mercados === 'EHT' &&
-                      rowItems.map((rowData, index) => (
-                        <EmpateHT
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={3.5}
-                        />
-                      ))}
-
-                    {mercados === 'EFT' &&
-                      rowItems.map((rowData, index) => (
-                        <AmbasMarcamSim
-                          key={`row-data-${index}`}
-                          rowData={rowData}
-                          op={3.5}
-                        />
-                      ))}
+                    <td
+                      className={`${
+                        percentage > 50 ? 'text-green-500' : 'text-white'
+                      } bg-slate-800 border border-solid border-black font-medium`}
+                    >
+                      {percentage}%
+                    </td>
                   </TableRow>
                 );
               })}

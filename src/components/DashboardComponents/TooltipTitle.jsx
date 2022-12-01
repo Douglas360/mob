@@ -1,10 +1,22 @@
-import { Fragment } from 'react';
 import { dateFormatWithHours } from '../../functions/formatters';
 
 export function TooltipTitle({ row }) {
+  if (row.isEmpty) {
+    return (
+      <div className="text-center">
+        <p className="text-white text-sm font-normal">
+          Infelizmente não conseguimos capturar as informações deste horário.
+        </p>
+        <p className="text-white text-sm font-normal">
+          Atualizaremos este evento o mais rápido possível!
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <Fragment>
-      {row.time_casa && row.time_casa ? (
+    <>
+      {row.time_casa ? (
         <p className="text-white text-lg font-medium">
           {row.time_casa + ' x ' + row.time_visitante}
         </p>
@@ -24,6 +36,6 @@ export function TooltipTitle({ row }) {
       <em className="text-white text-xs">
         {row.dt_atualizacao ? dateFormatWithHours(row.dt_atualizacao) : ''}
       </em>
-    </Fragment>
+    </>
   );
 }
