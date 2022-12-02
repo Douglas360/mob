@@ -1,3 +1,4 @@
+import { tableColumns } from '../components/DashboardComponents/Table/tableColumns';
 import { setTableCellBackgroundColor } from './setTableCellBackgroundColor';
 import { sortItemsByMinutoJogo } from './sortItemsByMinutoJogo';
 
@@ -34,86 +35,73 @@ export const formatTableData = (items, mercados, liga) => {
 
   // Padroniza as cada linha da tabela em 20 itens
   const filledItems = coloredItems.map((items, index) => {
+    const min = items[0]?.minuto_jogo;
+
     const minuto_jogo =
-      index === 0
-        ? items[0]?.minuto_jogo.split('.')[0] +
-          getColumnTime(liga, items[0]?.minuto_jogo)
-        : items[0]?.minuto_jogo;
+      index === 0 ? min.split('.')[0] + getColumnTime(liga, min) : min;
+
+    // Validação para quando virar o horário
+    if (items.length === 0) {
+      return Array(20).fill({
+        minuto_jogo: '00.00',
+        background: 'gray',
+        isEmpty: true,
+        isPending: true,
+      });
+    }
 
     if (items.length < 20) {
       const length = 20 - items.length;
 
       let newItems = [...items];
 
-      console.log(newItems);
+      let minutoAux = minuto_jogo.split('.')[0] + getColumnTime(liga, min);
 
-      for (let i = 0; i < length; i++) {
-        newItems.push({
-          minuto_jogo:
-            minuto_jogo.split('.')[0] +
-            getColumnTime(liga, items[0]?.minuto_jogo),
-          background: 'gray',
-          isEmpty: true,
-          isPending: index === 0,
-        });
+      if (index === 0) {
+        for (let i = 0; i < length; i++) {
+          newItems.push({
+            minuto_jogo: minutoAux,
+            background: 'gray',
+            isEmpty: true,
+            isPending: true,
+          });
+
+          minutoAux = minutoAux.split('.')[0] + getColumnTime(liga, minutoAux);
+        }
+      } else {
+        const colIndex = tableColumns[liga].filter(
+          ({ value }) => value === Number(minuto_jogo.split('.')[1]),
+        );
+
+        const allMinutos = [...items].map(item =>
+          Number(item.minuto_jogo.split('.')[1]),
+        );
+
+        // Encontra qual coluna o item faltando deve ficar
+        const tableCol = tableColumns[liga].find(
+          ({ value }) =>
+            value !== 'Hora' &&
+            value !== 'Dados' &&
+            !allMinutos.includes(value),
+        );
+
+        for (let i = 0; i < length; i++) {
+          newItems.splice(length - (colIndex.id - 2), 0, {
+            minuto_jogo:
+              minuto_jogo.split('.')[0] +
+              `.${String(tableCol.value).padStart(2, '0')}`,
+            background: 'gray',
+            isEmpty: true,
+            isPending: false,
+          });
+        }
       }
-
-      // if (index === 0) {
-      //   const minuto_jogo =
-      //     items[0]?.minuto_jogo.split('.')[0] +
-      //     getColumnTime(liga, items[0]?.minuto_jogo);
-
-      //   for (let i = 0; i < length; i++) {
-      //     newItems.push({
-      //       minuto_jogo:
-      //         minuto_jogo.split('.')[0] +
-      //         getColumnTime(liga, items[0]?.minuto_jogo),
-      //       background: 'gray',
-      //       isEmpty: true,
-      //       isPending: true,
-      //     });
-      //   }
-      // } else {
-      //   const minuto_jogo = items[0]?.minuto_jogo;
-
-      //   console.log('MIN', minuto_jogo);
-
-      //   const itemIndex =
-      //     tableColumns[liga]
-      //       .filter(item => item.value !== 'Hora' && item.value !== 'Dados')
-      //       .find(item => item.value !== Number(minuto_jogo.split('.'[0]))).id -
-      //     2;
-
-      //   console.log({ itemIndex, minuto_jogo: items[itemIndex]?.minuto_jogo });
-
-      //   for (let i = 0; i < length; i++) {
-      //     newItems.splice(length - itemIndex, 0, {
-      //       minuto_jogo:
-      //         minuto_jogo.split('.')[0] +
-      //         getColumnTime(liga, items[0]?.minuto_jogo),
-      //       background: 'gray',
-      //       isEmpty: true,
-      //       isPending: false,
-      //     });
-
-      //     // newItems.push({
-      //     //   minuto_jogo:
-      //     //     minuto_jogo.split('.')[0] +
-      //     //     getColumnTime(liga, items[0]?.minuto_jogo),
-      //     //   background: 'gray',
-      //     //   isEmpty: true,
-      //     //   isPending: false,
-      //     // });
-      //   }
-      // }
 
       return [...newItems];
     }
 
     return [...items];
   });
-
-  console.log({ filledItems });
 
   return filledItems;
 };
