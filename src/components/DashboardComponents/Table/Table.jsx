@@ -4,7 +4,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { SmileySad } from 'phosphor-react';
+import { HourglassMedium, SmileySad } from 'phosphor-react';
 import { tableColumns } from './tableColumns';
 
 import { Tooltip } from '../../Tooltip';
@@ -84,7 +84,14 @@ export function Table({ items, liga, mercados, partidas }) {
                             title={<TooltipTitle row={rowData} />}
                           >
                             <TableCell background={rowData.background}>
-                              <SmileySad className="mx-auto" size={20} />
+                              {rowData?.isPending ? (
+                                <HourglassMedium
+                                  className="mx-auto"
+                                  size={20}
+                                />
+                              ) : (
+                                <SmileySad className="mx-auto" size={20} />
+                              )}
                             </TableCell>
                           </Tooltip>
                         );
