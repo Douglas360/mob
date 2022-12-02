@@ -1,6 +1,16 @@
 import { dateFormatWithHours } from '../../functions/formatters';
 
 export function TooltipTitle({ row }) {
+  if (row.isPending) {
+    return (
+      <div className="text-center">
+        <p className="text-white text-sm font-normal">
+          Resultado pendente, aguarde o início do jogo.
+        </p>
+      </div>
+    );
+  }
+
   if (row.isEmpty) {
     return (
       <div className="text-center">
