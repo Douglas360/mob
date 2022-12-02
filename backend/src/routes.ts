@@ -21,7 +21,7 @@ router.post('/create', new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
 
 
-router.get('healthcheck', new HealthCheck().handle)
+router.get('/healthcheck', new HealthCheck().handle)
 router.get('/result/euro/:minuto', new ListResultController().handle_euro)
 router.get('/result/copa/:minuto', new ListResultController().handle_copa)
 router.get('/result/premier/:minuto', new ListResultController().handle_premier)
