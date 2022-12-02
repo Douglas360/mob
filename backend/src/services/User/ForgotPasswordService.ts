@@ -23,7 +23,8 @@ class ForgotPasswordService {
 
 
             const transporter = nodemailer.createTransport({
-                host: "smtp.umbler.com",
+                //host: "smtp.umbler.com",
+                host:'',
                 port: 587,
                 secure: false,
                 auth: {
