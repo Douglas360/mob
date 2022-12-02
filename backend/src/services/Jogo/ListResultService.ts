@@ -33,8 +33,8 @@ class ListResultService {
               select top 20 * from t_jogo 
                   where (id_liga=${id_liga}
                   and minuto_jogo like ${`${minuto}%`} 
-                  /*and dt_atualizacao between ${yesterday} and ${today})*/
-                  and dt_atualizacao between '2022-11-30 23:04:00' and '2022-12-1 23:59:59')
+                  and dt_atualizacao between ${yesterday} and ${today})
+                  /*and dt_atualizacao between '2022-11-30 23:04:00' and '2022-12-1 23:59:59')*/
                   
                   order by id_jogo desc
             
