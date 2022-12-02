@@ -56,7 +56,7 @@ export default function SignIn() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(http://localhost:3000/static/media/logo.c348e004ed178a7c2b62.png)',
+                        backgroundImage: 'url(https://supertips.com.br/static/media/logo.c348e004ed178a7c2b62.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                              t.palette.grey[900],                        
@@ -77,7 +77,7 @@ export default function SignIn() {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Acessar o sistema
+                            Acessar o sistema :)
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
