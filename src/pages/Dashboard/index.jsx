@@ -13,7 +13,7 @@ export function Dashboard() {
   const [fields, setFields] = useState({
     liga: 'euro',
     partidas: 24,
-    mercados: 'AMS',
+    mercados: 'ambas-marcam-sim',
   });
 
   const { data, error, isError, isLoading } = useMultipleRequests([
@@ -59,7 +59,7 @@ export function Dashboard() {
                   <ErrorMessage className="mt-4" error={error} />
                 ) : (
                   <Table
-                    items={formatTableData(data, fields.mercados)}
+                    items={formatTableData(data, fields.mercados, fields.liga)}
                     liga={fields.liga}
                     mercados={fields.mercados}
                     partidas={fields.partidas}

@@ -97,7 +97,7 @@ export function Table({ items, liga, mercados, partidas }) {
                         );
                       }
 
-                      if (mercados === 'EHT') {
+                      if (mercados === 'empate-HT') {
                         return (
                           <Tooltip
                             key={index}

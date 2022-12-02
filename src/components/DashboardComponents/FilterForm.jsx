@@ -33,7 +33,7 @@ export function FilterForm({ fields, setFields }) {
             <img src={eurocup} alt="Euro Cup" className="w-20 h-20" />
           </div>
 
-          <div className="flex flex-1 items-center justify-betweenh-24 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
+          <div className="flex flex-1 items-center justify-between h-24 bg-slate-700 rounded-md p-2 shadow-lg shadow-slate-900 hover:shadow-indigo-500/40">
             <FormGroup>
               <p className="text-white text-lg font-medium">Copa Do Mundo</p>
               <FormControlLabel
@@ -124,28 +124,28 @@ export function FilterForm({ fields, setFields }) {
               onChange={e => setFields({ ...fields, mercados: e.target.value })}
             >
               <ListSubheader>Ambas Marcam</ListSubheader>
-              <MenuItem value={'AMS'}>Ambas Marcam Sim</MenuItem>
-              <MenuItem value={'AMN'}>Ambas Marcam Não</MenuItem>
+              <MenuItem value="ambas-marcam-sim">Ambas Marcam Sim</MenuItem>
+              <MenuItem value="ambas-marcam-nao">Ambas Marcam Não</MenuItem>
 
               <ListSubheader>Empate</ListSubheader>
-              <MenuItem value={'EHT'}>Empate HT</MenuItem>
-              <MenuItem value={'EFT'}>Empate FT</MenuItem>
+              <MenuItem value="empate-HT">Empate HT</MenuItem>
+              <MenuItem value="empate-FT">Empate FT</MenuItem>
 
               <ListSubheader>Marca Gol</ListSubheader>
-              <MenuItem value={'CM'}>Casa Marca</MenuItem>
-              <MenuItem value={'FM'}>Fora Marca</MenuItem>
+              <MenuItem value="casa-marca">Casa Marca</MenuItem>
+              <MenuItem value="fora-marca">Fora Marca</MenuItem>
 
               <ListSubheader>Over</ListSubheader>
-              <MenuItem value={'O05'}>Over 0,5</MenuItem>
-              <MenuItem value={'O15'}>Over 1,5</MenuItem>
-              <MenuItem value={'O25'}>Over 2,5</MenuItem>
-              <MenuItem value={'O35'}>Over 3,5</MenuItem>
+              <MenuItem value="over-05">Over 0,5</MenuItem>
+              <MenuItem value="over-15">Over 1,5</MenuItem>
+              <MenuItem value="over-25">Over 2,5</MenuItem>
+              <MenuItem value="over-35">Over 3,5</MenuItem>
 
               <ListSubheader>Under</ListSubheader>
-              <MenuItem value={'U05'}>Under 0,5</MenuItem>
-              <MenuItem value={'U15'}>Under 1,5</MenuItem>
-              <MenuItem value={'U25'}>Under 2,5</MenuItem>
-              <MenuItem value={'U35'}>Under 3,5</MenuItem>
+              <MenuItem value="under-05">Under 0,5</MenuItem>
+              <MenuItem value="under-15">Under 1,5</MenuItem>
+              <MenuItem value="under-25">Under 2,5</MenuItem>
+              <MenuItem value="under-35">Under 3,5</MenuItem>
             </Select>
           </FormControl>
         </div>

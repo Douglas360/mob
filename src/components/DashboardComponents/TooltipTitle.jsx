@@ -15,7 +15,8 @@ export function TooltipTitle({ row }) {
     return (
       <div className="text-center">
         <p className="text-white text-sm font-normal">
-          Infelizmente não conseguimos capturar as informações deste horário.
+          Infelizmente não conseguimos capturar as informações do horário{' '}
+          {row.minuto_jogo}.
         </p>
         <p className="text-white text-sm font-normal">
           Atualizaremos este evento o mais rápido possível!
