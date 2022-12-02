@@ -1,6 +1,4 @@
 export const ErrorMessage = ({ error, className }) => {
-  console.log(error);
-
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <h3 className="text-white text-3xl font-bold">Ooops..</h3>

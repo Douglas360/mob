@@ -66,9 +66,12 @@ export function Table({ items, liga, mercados, partidas }) {
                   0,
                 );
 
-                const percentage = Number(
-                  (totalGreen / (totalRed + totalGreen)) * 100,
-                ).toFixed(0);
+                const total = totalRed + totalGreen;
+
+                const percentage =
+                  total === 0
+                    ? 0
+                    : Number((totalGreen / total) * 100).toFixed(0);
 
                 return (
                   <TableRow key={`table-row-${rowIndex}`}>
@@ -97,7 +100,7 @@ export function Table({ items, liga, mercados, partidas }) {
                         );
                       }
 
-                      if (mercados === 'EHT') {
+                      if (mercados === 'empate-HT') {
                         return (
                           <Tooltip
                             key={index}
