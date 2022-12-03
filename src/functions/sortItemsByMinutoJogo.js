@@ -23,7 +23,7 @@ export const sortItemsByMinutoJogo = items => {
   }
 
   const sortedItemsByMinutoJogo = [...items].sort((a, b) => {
-    if (a.length === 0 || b.length === 0) return 0;
+    if (a.length === 0 || b.length === 0) return -1;
 
     const minuto_jogo_a = a[0].minuto_jogo.split('.')[0].padStart(2, '0');
     const minuto_jogo_b = b[0].minuto_jogo.split('.')[0].padStart(2, '0');
