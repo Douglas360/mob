@@ -57,7 +57,7 @@ export default function ForgotPassword() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(http://localhost:3000/static/media/logo.c348e004ed178a7c2b62.png)',
+                        backgroundImage: 'url(https://supertips.com.br/static/media/logo.c348e004ed178a7c2b62.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                              t.palette.grey[900],                        
