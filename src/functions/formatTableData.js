@@ -19,7 +19,7 @@ const getColumnTime = (liga, minuto_jogo) => {
     return `.${newMinutoJogo}`;
   }
 
-  return `.${newMinutoJogo + 3}`;
+  return `.${String(newMinutoJogo + 3).padStart(2, '0')}`;
 };
 
 export const formatTableData = (items, mercados, liga) => {
@@ -97,8 +97,14 @@ export const formatTableData = (items, mercados, liga) => {
             isPending: false,
           });
 
+          const splitedMinutoAux = minutoAux.split('.');
+
+          const hora = splitedMinutoAux[0];
+          const minuto = splitedMinutoAux[1].padStart(2, '0');
+
           minutoAux =
-            minuto_jogo.split('.')[0] + getColumnTime(liga, minutoAux);
+            minuto_jogo.split('.')[0] +
+            getColumnTime(liga, `${hora}.${minuto}`);
         }
       }
 
