@@ -35,11 +35,6 @@ export const formatTableData = (items, mercados, liga) => {
 
   // Padroniza as cada linha da tabela em 20 itens
   const filledItems = coloredItems.map((items, index) => {
-    const min = items[0]?.minuto_jogo;
-
-    const minuto_jogo =
-      index === 0 ? min.split('.')[0] + getColumnTime(liga, min) : min;
-
     // Validação para quando virar o horário
     if (items.length === 0) {
       return Array(20).fill({
@@ -49,6 +44,11 @@ export const formatTableData = (items, mercados, liga) => {
         isPending: true,
       });
     }
+
+    const min = items[0]?.minuto_jogo;
+
+    const minuto_jogo =
+      index === 0 ? min.split('.')[0] + getColumnTime(liga, min) : min;
 
     if (items.length < 20) {
       const length = 20 - items.length;
