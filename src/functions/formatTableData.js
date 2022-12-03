@@ -55,9 +55,9 @@ export const formatTableData = (items, mercados, liga) => {
 
       let newItems = [...items];
 
-      let minutoAux = minuto_jogo.split('.')[0] + getColumnTime(liga, min);
-
       if (index === 0) {
+        let minutoAux = minuto_jogo.split('.')[0] + getColumnTime(liga, min);
+
         for (let i = 0; i < length; i++) {
           newItems.push({
             minuto_jogo: minutoAux,
@@ -85,15 +85,20 @@ export const formatTableData = (items, mercados, liga) => {
             !allMinutos.includes(value),
         );
 
+        let minutoAux =
+          minuto_jogo.split('.')[0] +
+          `.${String(tableCol.value).padStart(2, '0')}`;
+
         for (let i = 0; i < length; i++) {
           newItems.splice(length - (colIndex.id - 2), 0, {
-            minuto_jogo:
-              minuto_jogo.split('.')[0] +
-              `.${String(tableCol.value).padStart(2, '0')}`,
+            minuto_jogo: minutoAux,
             background: 'gray',
             isEmpty: true,
             isPending: false,
           });
+
+          minutoAux =
+            minuto_jogo.split('.')[0] + getColumnTime(liga, minutoAux);
         }
       }
 
