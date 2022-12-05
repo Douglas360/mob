@@ -7,13 +7,17 @@ export const ErrorMessage = ({ error, className }) => {
       </p>
       <p className="text-white text-base font-normal">{error.message}</p>
 
-      {error.response.data?.eror ? (
-        <p>{JSON.stringify(error.response.data.eror)}</p>
-      ) : (
-        <div
-          className="mt-4"
-          dangerouslySetInnerHTML={{ __html: error.response.data }}
-        />
+      {error.response && error.response?.data && (
+        <>
+          {error.response.data?.eror ? (
+            <p>{JSON.stringify(error.response.data.eror)}</p>
+          ) : (
+            <div
+              className="mt-4"
+              dangerouslySetInnerHTML={{ __html: error.response.data }}
+            />
+          )}
+        </>
       )}
     </div>
   );
