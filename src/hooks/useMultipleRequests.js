@@ -9,7 +9,7 @@ const fetcher = async (...urls) => {
   return responseItems;
 };
 
-export const useMultipleRequests = urls => {
+export const useMultipleRequests = (urls, options) => {
   const { data, error } = useSWR(
     urls.map(url => url),
     fetcher,
@@ -18,6 +18,7 @@ export const useMultipleRequests = urls => {
       refreshWhenOffline: true,
       revalidateIfStale: true,
       refreshWhenHidden: true,
+      ...options,
     },
   );
 
