@@ -1,26 +1,17 @@
+import { getHourNow } from './getHourNow';
+
 /**
  * Método para ordenar os dados pelo minuto do jogo.
  *
  * OBS: A API retorna o minuto do jogo em GMT 0
  */
 export const sortItemsByMinutoJogo = items => {
-  if (!items) return [];
+  if (!items) {
+    return [];
+  }
 
   // Pega hora atual
-  const hourNow = new Date().getHours();
-
-  let hour;
-
-  // Validação para corrigir a hora caso hora atual for maior que 22h
-  if (hourNow < 22) {
-    hour = String(hourNow + 3).padStart(2, '0');
-  } else if (hourNow === 22) {
-    hour = String(hourNow - 21).padStart(2, '0');
-  } else if (hourNow === 23) {
-    hour = String(hourNow - 21).padStart(2, '0');
-  } else if (hourNow === 24) {
-    hour = String(hourNow - 21).padStart(2, '0');
-  }
+  const hour = getHourNow();
 
   const sortedItemsByMinutoJogo = [...items].sort((a, b) => {
     if (a.length === 0 || b.length === 0) return -1;

@@ -1,4 +1,5 @@
 import { tableColumns } from '../components/DashboardComponents/Table/tableColumns';
+import { getHourNow } from './getHourNow';
 import { setTableCellBackgroundColor } from './setTableCellBackgroundColor';
 import { sortItemsByMinutoJogo } from './sortItemsByMinutoJogo';
 
@@ -23,96 +24,71 @@ const getColumnTime = (liga, minuto_jogo) => {
 };
 
 export const formatTableData = (items, mercados, liga) => {
-  if (!items) return [];
+  if (!items) {
+    return [];
+  }
 
-  // Ordena os items por minuto do jogo
-  const sortedItemsByMinutoJogo = sortItemsByMinutoJogo(items);
-
-  // Define as cores do background do item da tabela
-  const coloredItems = sortedItemsByMinutoJogo.map(sortedItems => {
+  // Define as cores do background de cada item
+  const coloredItems = items.map(sortedItems => {
     return setTableCellBackgroundColor(sortedItems, mercados);
   });
 
-  // Padroniza as cada linha da tabela em 20 itens
+  // Padroniza cada linha da tabela em 20 itens
   const filledItems = coloredItems.map((items, index) => {
+    const hourNow = getHourNow();
+
     // Validação para quando virar o horário
     if (items.length === 0) {
+      const hour = getHourNow();
+
       return Array(20).fill({
-        minuto_jogo: '00.00',
+        minuto_jogo: `${hour}.00`,
         background: 'gray',
         isEmpty: true,
         isPending: true,
       });
     }
 
-    const min = items[0]?.minuto_jogo;
+    const min = items[0].minuto_jogo;
 
     const minuto_jogo =
       index === 0 ? min.split('.')[0] + getColumnTime(liga, min) : min;
 
     if (items.length < 20) {
-      const length = 20 - items.length;
-
-      let newItems = [...items];
-
-      if (index === 0) {
-        let minutoAux = minuto_jogo.split('.')[0] + getColumnTime(liga, min);
-
-        for (let i = 0; i < length; i++) {
-          newItems.push({
-            minuto_jogo: minutoAux,
-            background: 'gray',
-            isEmpty: true,
-            isPending: true,
-          });
-
-          minutoAux = minutoAux.split('.')[0] + getColumnTime(liga, minutoAux);
-        }
-      } else {
-        const colIndex = tableColumns[liga].filter(
-          ({ value }) => value === Number(minuto_jogo.split('.')[1]),
-        );
-
-        const allMinutos = [...items].map(item =>
-          Number(item.minuto_jogo.split('.')[1]),
-        );
-
-        // Encontra qual coluna o item faltando deve ficar
-        const tableCol = tableColumns[liga].find(
-          ({ value }) =>
-            value !== 'Hora' &&
-            value !== 'Dados' &&
-            !allMinutos.includes(value),
-        );
-
-        let minutoAux =
-          minuto_jogo.split('.')[0] +
-          `.${String(tableCol.value).padStart(2, '0')}`;
-
-        for (let i = 0; i < length; i++) {
-          newItems.splice(length - (colIndex.id - 2), 0, {
-            minuto_jogo: minutoAux,
-            background: 'gray',
-            isEmpty: true,
-            isPending: false,
-          });
-
-          const splitedMinutoAux = minutoAux.split('.');
-
-          const hora = splitedMinutoAux[0];
-          const minuto = splitedMinutoAux[1].padStart(2, '0');
-
-          minutoAux =
+      // Cria array de 20 posições com minuto jogo de cada coluna da tabela
+      const columns = tableColumns[liga]
+        .filter(col => col.value !== 'Hora' && col.value !== 'Dados')
+        .map(col => ({
+          minuto_jogo:
             minuto_jogo.split('.')[0] +
-            getColumnTime(liga, `${hora}.${minuto}`);
-        }
-      }
+            `.${String(col.value).padStart(2, '0')}`,
+        }));
 
-      return [...newItems];
+      const newItems = columns.map(col => {
+        const item = items.find(item => item.minuto_jogo === col.minuto_jogo);
+
+        if (!item) {
+          const isPending = col.minuto_jogo.split('.')[0] === hourNow;
+
+          return {
+            minuto_jogo: col.minuto_jogo,
+            background: 'gray',
+            isEmpty: true,
+            isPending,
+          };
+        }
+
+        return item;
+      });
+
+      return newItems;
     }
 
     return [...items];
   });
 
-  return filledItems;
+  // Ordena os items por minuto do jogo
+  const sortedItemsByMinutoJogo = sortItemsByMinutoJogo(filledItems);
+
+  return sortedItemsByMinutoJogo;
 };
