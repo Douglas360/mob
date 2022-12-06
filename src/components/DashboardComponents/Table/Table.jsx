@@ -141,7 +141,7 @@ export function Table({ items, liga, mercados, partidas }) {
 
                     <td
                       className={`${
-                        percentage > 50 ? 'text-green-500' : 'text-white'
+                        percentage >= 50 ? 'text-green-500' : 'text-white'
                       } bg-slate-800 border border-solid border-black font-medium`}
                     >
                       {percentage}%
