@@ -4,20 +4,20 @@ const nodemailer = require("nodemailer");
 import { sign } from 'jsonwebtoken'
 
 interface UserRequest {
-   
+
     name: string
     email: string
     password: string
 }
 
 interface UserUpdate {
-    id:number
+    id: number
     name: string
     email: string
     password: string
 }
 
-interface Verify{
+interface Verify {
     id: number
 }
 
@@ -64,31 +64,31 @@ class CreateUserService {
                 expiresIn: '1d'
             })
 
-        const url = `http://localhost:3000/confirmation/${tokenEmail}`
+        const url = `https://supertips.com.br/confirmation/${tokenEmail}`
 
-        let transporter = nodemailer.createTransport({
-            host: "smtp.umbler.com",
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: 'douglas@magicti.com', // generated ethereal user
-                pass: 'a12345@@' // generated ethereal password
-            },
-        });
+         let transporter = nodemailer.createTransport({
+             host: "smtp.umbler.com",
+             port: 587,
+             secure: false, // true for 465, false for other ports
+             auth: {
+                 user: 'douglas@magicti.com', // generated ethereal user
+                 pass: 'a12345@@' // generated ethereal password
+             },
+         });
+ 
+         await transporter.sendMail({
+             from: '"Super Tips" <douglas@magicti.com>', // sender address
+             to: email, // list of receivers
+             subject: "Ative sua conta", // Subject line
+             html: `Confirme no link para ativar sua conta: <a href="${url}">Aqui</a>`,
+             text: `Clique no link para ativar sua conta: <a href="${url}">Aqui</a>`
+         });
 
-        let info = await transporter.sendMail({
-            from: '"Super Tips" <douglas@magicti.com>', // sender address
-            to: email, // list of receivers
-            subject: "Ative sua conta", // Subject line
-            html: `Confirme no link para ativar sua conta: <a href="${url}">Aqui</a>`,
-            text: `Clique no link para ativar sua conta: <a href="${url}">Aqui</a>`
-        });
-
-
+        
         return user
     }
 
-    async update({ id }:Verify) {
+    async update({ id }: Verify) {
 
 
         const verifyEmail = await prismaClient.user.update({
@@ -107,18 +107,18 @@ class CreateUserService {
 
     }
 
-    async updateUser({id, name, email, password }: UserUpdate){
+    async updateUser({ id, name, email, password }: UserUpdate) {
         let date_update = new Date();
         const passwordHash = await hash(password, 8)
         const updateUser = await prismaClient.user.update({
-            where:{
+            where: {
                 id_usuario: id
             },
-            data:{
-                nm_usuario:name,
-                email_usuario:email,
-                password:passwordHash,
-                dt_atualizacao:date_update
+            data: {
+                nm_usuario: name,
+                email_usuario: email,
+                password: passwordHash,
+                dt_atualizacao: date_update
             }
         })
 

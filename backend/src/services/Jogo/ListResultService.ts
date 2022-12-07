@@ -9,11 +9,9 @@ var dayL = date_ob.getDate() - 1
 
 var month = date_ob.getMonth() + 1
 var year = date_ob.getFullYear();
-var hour = date_ob.getHours()+1
+var hour = date_ob.getHours() + 1
 var yesterday = `${year}-${month}-${dayL} ${hour}:04:00`
 var today = `${year}-${month}-${day} 23:59:00`
-
-
 
 
 //var today = moment().format('YYYY-MM-DD h:m:s')
@@ -34,18 +32,18 @@ class ListResultService {
                   where (id_liga=${id_liga}
                   and minuto_jogo like ${`${minuto}%`} 
                   and dt_atualizacao between ${yesterday} and ${today})
-                  /*and dt_atualizacao between '2022-11-30 23:04:00' and '2022-12-1 23:59:59')*/
+                  /*and dt_atualizacao between '2022-12-06 00:04:00' and '2022-12-7 23:59:59'*/
                   
                   order by id_jogo desc
             
               `
 
-
         //  await setRedis(`minuto-${minuto}`, JSON.stringify(result)) // Seta os dados no cache
-        //console.log(yesterday)
-        return result
-
-
+        //console.log(hour)
+        return {
+            'hora': minuto,
+            'items': result
+        }
 
     }
 
