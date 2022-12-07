@@ -1,11 +1,14 @@
 export const TotalPercentage = ({ items, liga }) => {
-  const totalRed = [...items]
+  const tableItems = items.map(item => item.items);
+
+  const totalRed = tableItems
     .flatMap(item => item)
     .reduce(
       (prev, curr) => prev + Number(curr.background === 'red' ? 1 : 0),
       0,
     );
-  const totalGreen = [...items]
+
+  const totalGreen = tableItems
     .flatMap(item => item)
     .reduce(
       (prev, curr) => prev + Number(curr.background === 'green' ? 1 : 0),

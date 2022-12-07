@@ -1,5 +1,5 @@
-export const setTableCellBackgroundColor = (items, mercados) => {
-  return items.map(rowData => {
+export const setTableCellBackgroundColor = (tableItem, mercados) => {
+  const items = tableItem.items.map(rowData => {
     const result_ft_casa = rowData.result_ft_casa;
     const result_ft_visitante = rowData.result_ft_visitante;
 
@@ -93,4 +93,6 @@ export const setTableCellBackgroundColor = (items, mercados) => {
         return { ...rowData };
     }
   });
+
+  return { hora: tableItem.hora, items };
 };
