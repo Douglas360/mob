@@ -45,13 +45,13 @@ export function Table({ items, liga, mercados, partidas }) {
           <TableBody>
             {itemsByPartidas &&
               itemsByPartidas.length > 0 &&
-              itemsByPartidas.map((sortedItems, rowIndex) => {
-                const minuto = sortedItems[0]?.minuto_jogo?.split('.')[0];
+              itemsByPartidas.map((item, rowIndex) => {
+                const minuto = item.items[0]?.minuto_jogo?.split('.')[0];
 
                 if (!minuto) return null;
 
                 // Ordena os items das linhas da tabela referente ao minuto jogo
-                const rowItems = sortedItems.sort((a, b) =>
+                const rowItems = item.items.sort((a, b) =>
                   a.minuto_jogo > b.minuto_jogo ? 1 : -1,
                 );
 

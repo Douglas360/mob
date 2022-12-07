@@ -16,7 +16,7 @@ export function TooltipTitle({ row }) {
       <div className="text-center">
         <p className="text-white text-sm font-normal">
           Infelizmente não conseguimos capturar as informações do horário{' '}
-          {row.minuto_jogo}.
+          {row.minuto_jogo?.padStart(5, '0')}.
         </p>
         <p className="text-white text-sm font-normal">
           Atualizaremos este evento o mais rápido possível!
