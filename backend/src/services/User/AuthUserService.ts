@@ -11,7 +11,7 @@ interface AuthRequest {
     password: string
 }
 
-const dateValidate  = new Date(moment().format('YYYY-MM-DD')) as Date | undefined
+const dateValidate  = new Date(moment().format('YYYY-MM-DD')) as Date | null
 
 
 class AuthUserService {
