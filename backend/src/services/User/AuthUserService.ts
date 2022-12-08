@@ -43,7 +43,7 @@ class AuthUserService {
 
         }
 
-        if (user.validate < ValidateUser) {
+        if (user?.validate < ValidateUser) {
             throw new Error("UsuárioExpirado")
 
         }
