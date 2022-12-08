@@ -11,6 +11,8 @@ interface AuthRequest {
     password: string
 }
 
+const dateValidate = new Date(moment().format('YYYY-MM-DD'))
+
 class AuthUserService {
     async execute({ email, password }: AuthRequest) {
         //verificar se o email existe
@@ -32,7 +34,7 @@ class AuthUserService {
             throw new Error("UsuárioInativo")
 
         }
-        if(user.validate < new Date(moment().format('YYYY-MM-DD'))){
+        if(user.validate < dateValidate){
             throw new Error("UsuárioExpirado")
 
         }
