@@ -24,12 +24,12 @@ class ForgotPasswordService {
 
             const transporter = nodemailer.createTransport({
                 //host: "smtp.umbler.com",
-                host:'',
+                host:'smtp.umbler.com',
                 port: 587,
                 secure: false,
                 auth: {
-                    user: '', // generated ethereal user
-                    pass: '' // generated ethereal password
+                    user: 'contato@supertips.com.br', // generated ethereal user
+                    pass: 'a12345@@' // generated ethereal password
                 },
             });
 
@@ -43,12 +43,12 @@ class ForgotPasswordService {
                     expiresIn: '1d'
                 })
 
-            const url = `http://localhost:3000/reset_password/${token}`
+            const url = `https://supertips.com.br/reset_password/${token}`
 
             const info = await transporter.sendMail({
-                from: '"Super Tips" <douglas@magicti.com>', // sender address
+                from: '"Super Tips" <contato@supertips.com.br>', // sender address
                 to: email, // list of receivers
-                subject: "Ative sua conta", // Subject line
+                subject: "Altere sua senha", // Subject line
                 html: `Confirme no link para resetar a senha da sua conta: <a href="${url}">Aqui</a>`,
                 text: `Confirme no link para resetar a senha da sua conta: <a href="${url}">Aqui</a>`
             });

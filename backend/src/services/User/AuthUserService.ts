@@ -3,6 +3,7 @@ dotenv.config()
 import prismaClient from "../../prisma";
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
+import moment = require('moment');
 
 
 interface AuthRequest {
@@ -27,8 +28,12 @@ class AuthUserService {
             throw new Error("Password incorrect");
         }
 
-        if (user.status_usuario === 0) {
+        if (user.status_usuario === 0 ) {
             throw new Error("UsuárioInativo")
+
+        }
+        if(user.validate < new Date(moment().format('YYYY-MM-DD'))){
+            throw new Error("UsuárioExpirado")
 
         }
         if (user.verificado === 0) {
@@ -64,7 +69,8 @@ class AuthUserService {
             id_usuario: user.id_usuario,
             name: user.nm_usuario,
             email: user.email_usuario,
-            token: token
+            token: token,
+            validate:user.validate
 
         }
     }

@@ -2,6 +2,7 @@ import prismaClient from '../../prisma'
 import { hash } from 'bcryptjs'
 const nodemailer = require("nodemailer");
 import { sign } from 'jsonwebtoken'
+import moment = require('moment');
 
 interface UserRequest {
 
@@ -46,7 +47,8 @@ class CreateUserService {
             data: {
                 nm_usuario: name,
                 email_usuario: email,
-                password: passwordHash
+                password: passwordHash,
+                validate: new Date(moment().add(30, 'days').calendar())
             },
             select: {
                 id_usuario: true,
@@ -71,13 +73,13 @@ class CreateUserService {
              port: 587,
              secure: false, // true for 465, false for other ports
              auth: {
-                 user: 'douglas@magicti.com', // generated ethereal user
+                 user: 'contato@supertips.com.br', // generated ethereal user
                  pass: 'a12345@@' // generated ethereal password
              },
          });
  
          await transporter.sendMail({
-             from: '"Super Tips" <douglas@magicti.com>', // sender address
+             from: '"Super Tips" <contato@supertips.com.br>', // sender address
              to: email, // list of receivers
              subject: "Ative sua conta", // Subject line
              html: `Confirme no link para ativar sua conta: <a href="${url}">Aqui</a>`,

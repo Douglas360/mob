@@ -13,7 +13,7 @@ class ForgotPasswordController {
 
         const forgotPassword = new ForgotPasswordService()
 
-        const newPassword = await forgotPassword.execute(
+       await forgotPassword.execute(
             email
         )
 

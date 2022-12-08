@@ -45,6 +45,7 @@ model User{
   dt_criacao DateTime @default(now())
   dt_atualizacao DateTime?
   verificado Int @default(0)
+  validate DateTime?
   
  
   
