@@ -12,7 +12,9 @@ import SignIn from '../pages/Login';
 import SignUp from '../pages/Login/register';
 import { UserProfile } from '../pages/Profile/UserProfile';
 import { UserSubscription } from '../pages/Profile/UserSubscription';
-// import ForgotPassword from '../pages/Login/forgotPassword';
+import ForgotPassword from '../pages/Login/forgotPassword';
+import {UserConfirmation} from '../pages/Profile/UserConfirmation';
+
 
 export const AppRouter = () => {
   const Private = ({ children }) => {
@@ -70,14 +72,14 @@ export const AppRouter = () => {
               </Autenticado>
             }
           />
-          {/* <Route
+          <Route
             path="/forgot"
             element={
               <Autenticado>
                 <ForgotPassword />
               </Autenticado>
             }
-          /> */}
+          />
           <Route
             path="/dashboard"
             element={
@@ -100,6 +102,14 @@ export const AppRouter = () => {
               <Private>
                 <UserProfile />
               </Private>
+            }
+          />
+          <Route
+            path="/confirmation/:token"
+            element={
+             
+                <UserConfirmation />
+              
             }
           />
         </Routes>

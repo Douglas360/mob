@@ -8,6 +8,7 @@ import { ErrorMessage } from '../../components/ErrorMessage';
 import { Header } from '../../components/LayoutComponents/Header';
 import { Table } from '../../components/DashboardComponents/Table/Table';
 import { FilterForm } from '../../components/DashboardComponents/FilterForm';
+import { CopyrightDashboard } from '../../components/LayoutComponents/CopyrightDashboard';
 
 export function Dashboard() {
   const [fields, setFields] = useState({
@@ -53,7 +54,7 @@ export function Dashboard() {
         <div className="flex flex-col  p-4 gap-4 text-white ">
           <FilterForm fields={fields} setFields={setFields} />
 
-          <div className="min-h-screen max-h-full max-w-full bg-dark-pn rounded-md pt-2 pl-10 pr-10 pb-3 text-center shadow-lg shadow-cyan-900">
+          <div className="min-h-auto max-h-full max-w-full bg-dark-pn rounded-md pt-2 pl-10 pr-10 pb-3 text-center shadow-lg shadow-cyan-900">
             {isLoading ? (
               <Loading className="mt-4" />
             ) : (
@@ -70,6 +71,7 @@ export function Dashboard() {
                 )}
               </>
             )}
+          <CopyrightDashboard />
           </div>
         </div>
       </main>

@@ -119,6 +119,17 @@ export const AuthProvider = ({ children }) => {
                     progress: undefined,
                 });
 
+            } if (erro === "UsuárioExpirado") {
+                toast.error('Usuário Expirado!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
             }
             console.log(erro)
 
@@ -226,9 +237,9 @@ export const AuthProvider = ({ children }) => {
 
     const resetPasswod = async ({ email }) => {
         try {
-            api.get('/forgot',{
+            api.get('/forgot', {
                 email
-            }).then((response)=>{
+            }).then((response) => {
                 toast.success('Verifique seu e-mail ', {
                     position: "top-center",
                     autoClose: 5000,
@@ -255,11 +266,34 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const UserConfirmation = async (token) => {
+        try {
+            
+            api.get(`/confirmation/${token}`, {
+               
+
+            })
+        } catch (error) {
+            console.log(error)
+            toast.error('Erro! Tente novamente', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+        }
+
+    }
+
     return (
 
         <AuthContext.Provider value={{
             autenticado:
-                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, resetPasswod
+                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, resetPasswod, UserConfirmation
         }}>
 
             {children}
