@@ -235,9 +235,11 @@ export const AuthProvider = ({ children }) => {
         navigate("/")
     }
 
-    const resetPasswod = async ({ email }) => {
+    const resetPasswod = async ( email ) => {
+        
         try {
-            api.get('/forgot', {
+            console.log(email)
+            api.get('forgot', {
                 email
             }).then((response) => {
                 toast.success('Verifique seu e-mail ', {
