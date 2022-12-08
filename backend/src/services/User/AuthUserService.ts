@@ -10,8 +10,15 @@ interface AuthRequest {
     email: string;
     password: string
 }
+const dateValidate = new Date(moment().format('YYYY-MM-DD'))
 
-const dateValidate  = new Date(moment().format('YYYY-MM-DD')) as Date | null
+interface DateValidate {
+    data?: {
+        dateValidate?: Date;
+    } | null;
+}
+
+const ValidateUser: DateValidate = {};
 
 
 class AuthUserService {
@@ -31,18 +38,16 @@ class AuthUserService {
             throw new Error("Password incorrect");
         }
 
-        if (user.status_usuario === 0 ) {
+        if (user.status_usuario === 0) {
             throw new Error("UsuárioInativo")
 
         }
-        if(!dateValidate){
-            return null
-        }else{
-            if(user.validate < dateValidate){
-                throw new Error("UsuárioExpirado")
-    
-            }
+
+        if (user.validate < ValidateUser) {
+            throw new Error("UsuárioExpirado")
+
         }
+
         if (user.verificado === 0) {
             throw new Error("Usuário Não verificado")
 
@@ -77,7 +82,7 @@ class AuthUserService {
             name: user.nm_usuario,
             email: user.email_usuario,
             token: token,
-            validate:user.validate
+            validate: user.validate
 
         }
     }
