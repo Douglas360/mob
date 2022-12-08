@@ -11,7 +11,8 @@ interface AuthRequest {
     password: string
 }
 
-const dateValidate = new Date(moment().format('YYYY-MM-DD'))
+const dateValidate  = new Date(moment().format('YYYY-MM-DD'))
+
 
 class AuthUserService {
     async execute({ email, password }: AuthRequest) {
@@ -34,9 +35,13 @@ class AuthUserService {
             throw new Error("UsuárioInativo")
 
         }
-        if(user.validate < dateValidate){
-            throw new Error("UsuárioExpirado")
-
+        if(!dateValidate){
+            return null
+        }else{
+            if(user.validate < dateValidate){
+                throw new Error("UsuárioExpirado")
+    
+            }
         }
         if (user.verificado === 0) {
             throw new Error("Usuário Não verificado")
