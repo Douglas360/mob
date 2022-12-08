@@ -10,15 +10,6 @@ interface AuthRequest {
     email: string;
     password: string
 }
-const dateValidate = new Date(moment().format('YYYY-MM-DD'))
-
-interface DateValidate {
-    data?: {
-        dateValidate?: Date;
-    } | null;
-}
-
-const ValidateUser: DateValidate = {};
 
 
 class AuthUserService {
@@ -43,7 +34,7 @@ class AuthUserService {
 
         }
 
-        if (user?.validate < ValidateUser) {
+        if (user?.validate < new Date(moment().format('YYYY-MM-DD'))) {
             throw new Error("UsuárioExpirado")
 
         }
