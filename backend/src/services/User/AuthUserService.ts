@@ -34,7 +34,7 @@ class AuthUserService {
 
         }
 
-        if (user?.validate < new Date(moment().format('YYYY-MM-DD'))) {
+        if (user?.validate < new Date(moment().format('YYYY-MM-DD'))!) {
             throw new Error("UsuárioExpirado")
 
         }
