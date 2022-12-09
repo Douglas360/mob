@@ -29,7 +29,8 @@ export const formatTableData = (items, mercados, liga) => {
         const item = items.find(item => item.minuto_jogo === col.minuto_jogo);
 
         if (!item) {
-          const isPending = col.minuto_jogo.split('.')[0] === getHourNow();
+          const isPending =
+            col.minuto_jogo.split('.')[0].padStart(2, '0') === getHourNow();
 
           return {
             minuto_jogo: col.minuto_jogo,
