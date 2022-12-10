@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 
 const stripe = require('stripe')('sk_test_51MCsigDXO8lGdsO055v4StRAuJvuMloJpnbrzPBdPNz7Mx310tglUPwtKFY8ugG8CDfe25BSZGvE7d5xk4QO5UKc00P6hktfdt');
-const YOUR_DOMAIN = 'https://supertips.com.br';
+//const YOUR_DOMAIN = 'https://supertips.com.br';
+const YOUR_DOMAIN = 'http://supertips.com.br';
 class CheckoutController {
     async execute(req:Request, res:Response) {
         
