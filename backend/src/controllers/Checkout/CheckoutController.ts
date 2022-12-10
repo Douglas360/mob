@@ -17,7 +17,7 @@ class CheckoutController {
                 line_items: [
                     {
                         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                        price: 'price_1MCt3BDXO8lGdsO0fOnoSyyF',
+                        price: 'price_1MDa6XDXO8lGdsO0TRL12Nm6',
                         quantity: 1,
                     },
                 ],
