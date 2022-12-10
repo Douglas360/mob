@@ -21,9 +21,7 @@ class CheckoutController {
                         quantity: 1,
                     },
                 ],
-                discounts: [{
-                    coupon: 'X49bP8bt',
-                }],
+                coupon: 'free-period',
                 mode: 'subscription',
                 customer: customer.id,
                 success_url: `${YOUR_DOMAIN}/success/${email}`,
