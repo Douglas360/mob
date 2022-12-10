@@ -31,8 +31,8 @@ router.get('/result/super/:minuto', new ListResultController().handle_super)
 router.post('/send_email', new CreateUserController().sendEmail)
 
 router.post('/create-checkout-session', new CheckoutController().execute)
-router.get('/v1/customers',new ListCustomer().execute)
-router.get('/v1/customers/search',new ListCustomer().search)
+router.get('/v1/customers',new ListCustomer().customerList)
+router.get('/v1/customers/search',new ListCustomer().customerSearch)
 
 
 

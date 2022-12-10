@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 
 const stripe = require('stripe')('sk_test_51MCsigDXO8lGdsO055v4StRAuJvuMloJpnbrzPBdPNz7Mx310tglUPwtKFY8ugG8CDfe25BSZGvE7d5xk4QO5UKc00P6hktfdt');
-const YOUR_DOMAIN = 'http://localhost:3000/';
+const YOUR_DOMAIN = 'https://supertips.com.br';
 class CheckoutController {
     async execute(req:Request, res:Response) {
         
@@ -22,7 +22,7 @@ class CheckoutController {
                 ],
                 mode: 'subscription',
                 customer: customer.id,
-                success_url: `${YOUR_DOMAIN}success/${email}`,
+                success_url: `${YOUR_DOMAIN}/success/${email}`,
                 cancel_url: `${YOUR_DOMAIN}?canceled=true`,
 
 

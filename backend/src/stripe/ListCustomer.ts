@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
 
 const stripe = require('stripe')('sk_test_51MCsigDXO8lGdsO055v4StRAuJvuMloJpnbrzPBdPNz7Mx310tglUPwtKFY8ugG8CDfe25BSZGvE7d5xk4QO5UKc00P6hktfdt');
-const YOUR_DOMAIN = 'http://localhost:3000/';
+
 class ListCustomer {
-    async execute(req:Request, res:Response) {
+    async customerList(req:Request, res:Response) {
         
         try {
             const {name, email} = req.body
@@ -22,7 +22,7 @@ class ListCustomer {
         }
 
     }
-    async search(req:Request, res:Response) {
+    async customerSearch(req:Request, res:Response) {
         
         try {
             const {name, email} = req.body
