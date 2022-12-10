@@ -1,13 +1,13 @@
 import { Request, Response } from "express"
 
 const stripe = require('stripe')(process.env.API_STRIPE_SECRET_KEY);
-//const YOUR_DOMAIN = 'https://supertips.com.br';
-const YOUR_DOMAIN = 'http://supertips.com.br';
+const YOUR_DOMAIN = 'https://supertips.com.br';
+
 class CheckoutController {
-    async execute(req:Request, res:Response) {
-        
+    async execute(req: Request, res: Response) {
+
         try {
-            const {name, email} = req.body
+            const { name, email } = req.body
             const customer = await stripe.customers.create({
                 email: email,
                 name: name,
@@ -29,10 +29,10 @@ class CheckoutController {
 
             });
 
-           // console.log(name, email)
-           
+            // console.log(name, email)
+
             res.json({ url: session.url })
-          
+
 
 
         } catch (error) {
