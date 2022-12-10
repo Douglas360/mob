@@ -8,6 +8,7 @@ import { HealthCheck } from './config/healthCheck'
 
 import { CheckoutController } from './controllers/Checkout/CheckoutController'
 import { ListCustomer } from './stripe/ListCustomer'
+import { ListSubscription } from './stripe/ListSubscription'
 
 
 import { auth } from './middlewares/auth'
@@ -33,7 +34,8 @@ router.post('/send_email', new CreateUserController().sendEmail)
 router.post('/create-checkout-session', new CheckoutController().execute)
 router.get('/v1/customers',new ListCustomer().customerList)
 router.get('/v1/customers/search',new ListCustomer().customerSearch)
-
+router.get('/v1/subscriptions', new ListSubscription().subscriptionList)
+router.get('/v1/subscriptions/search', new ListSubscription().subscriptionSearch)
 
 
 

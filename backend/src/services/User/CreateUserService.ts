@@ -18,10 +18,6 @@ interface UserUpdate {
     password: string
 }
 
-interface Verify {
-    id: number
-}
-
 interface Send {
     email: string
 }

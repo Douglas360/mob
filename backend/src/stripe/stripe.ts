@@ -1,0 +1,1 @@
+export const stripe = require('stripe')(process.env.API_STRIPE_SECRET_KEY);

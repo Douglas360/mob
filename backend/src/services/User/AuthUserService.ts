@@ -2,13 +2,16 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import prismaClient from "../../prisma";
 import { compare } from 'bcryptjs'
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 import moment = require('moment');
 
 
 interface AuthRequest {
     email: string;
     password: string
+}
+interface Token {
+    token: string
 }
 
 
@@ -63,7 +66,7 @@ class AuthUserService {
             },//process.env.JWT_SECRET
             'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx',
             {
-                expiresIn: '30d'
+                expiresIn: '120s'
             }
 
         )
@@ -78,4 +81,5 @@ class AuthUserService {
 
         }
     }
+
 } export { AuthUserService }
