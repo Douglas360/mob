@@ -9,11 +9,12 @@ import {
 import { AuthProvider, AuthContext } from '../contexts/auth';
 import { Dashboard } from '../pages/Dashboard';
 import SignIn from '../pages/Login';
-import SignUp from '../pages/Login/register';
+import SignUp from '../pages/Register';
 import { UserProfile } from '../pages/Profile/UserProfile';
 import { UserSubscription } from '../pages/Profile/UserSubscription';
 import ForgotPassword from '../pages/Login/forgotPassword';
-import {UserConfirmation} from '../pages/Profile/UserConfirmation';
+import { UserConfirmation } from '../pages/Profile/UserConfirmation';
+import { SuccessPage } from '../pages/Register/success';
 
 
 export const AppRouter = () => {
@@ -107,11 +108,21 @@ export const AppRouter = () => {
           <Route
             path="/confirmation/:token"
             element={
-             
-                <UserConfirmation />
-              
+
+              <UserConfirmation />
+
             }
           />
+
+          <Route
+            path="/success/:email"
+            element={
+
+              <SuccessPage />
+
+            }
+          />
+
         </Routes>
       </AuthProvider>
     </Router>

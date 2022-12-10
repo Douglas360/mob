@@ -33,6 +33,28 @@ export const AuthProvider = ({ children }) => {
 
     }, [])
 
+    const checkout = async (name, email) => {
+        try {
+            const res = await fetch(`http://localhost:3001/create-checkout-session`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email
+                })
+            })
+            const body = await res.json()
+
+
+            window.location.href = body.url
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const login = async ({ email, password }) => {
 
@@ -151,17 +173,19 @@ export const AuthProvider = ({ children }) => {
 
 
             }).then((response) => {
-                toast.success('Validar Email para acessar o sistema ', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                /* toast.success('Validar Email para acessar o sistema ', {
+                     position: "top-center",
+                     autoClose: 5000,
+                     hideProgressBar: false,
+                     closeOnClick: true,
+                     pauseOnHover: true,
+                     draggable: true,
+                     progress: undefined,
+                 });*/
 
-                navigate("/")
+                checkout(name, email)
+
+                //  navigate("/")
             })
 
 
@@ -235,8 +259,8 @@ export const AuthProvider = ({ children }) => {
         navigate("/")
     }
 
-    const resetPasswod = async ( email ) => {
-        
+    const resetPasswod = async (email) => {
+
         try {
             console.log(email)
             api.get('forgot', {
@@ -270,9 +294,9 @@ export const AuthProvider = ({ children }) => {
 
     const UserConfirmation = async (token) => {
         try {
-            
+
             api.get(`/confirmation/${token}`, {
-               
+
 
             })
         } catch (error) {
@@ -291,11 +315,35 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+    const sendEmail = async (email) => {
+        try {
+
+            api.post(`send_email`, {
+                email
+
+
+            })
+           
+        } catch (error) {
+            console.log(error)
+            toast.error('Erro! Tente novamente', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+        }
+    }
+
     return (
 
         <AuthContext.Provider value={{
             autenticado:
-                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, resetPasswod, UserConfirmation
+                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, resetPasswod, UserConfirmation, sendEmail
         }}>
 
             {children}
