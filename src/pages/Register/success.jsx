@@ -14,8 +14,9 @@ export function SuccessPage() {
     useEffect(() => {
 
        sendEmail(email)
-       useNavigate('/')
+       
     });
+    useNavigate('/')
    // alert('Parabens! Acesse seu email para Ativar sua conta')
   
     //return <div>{email}</div>
