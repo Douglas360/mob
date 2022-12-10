@@ -21,6 +21,9 @@ class CheckoutController {
                         quantity: 1,
                     },
                 ],
+                discounts: [{
+                    coupon: '{{COUPON_ID}}',
+                  }],
                 mode: 'subscription',
                 customer: customer.id,
                 success_url: `${YOUR_DOMAIN}/success/${email}`,
