@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-const stripe = require('stripe')('sk_test_51MCsigDXO8lGdsO055v4StRAuJvuMloJpnbrzPBdPNz7Mx310tglUPwtKFY8ugG8CDfe25BSZGvE7d5xk4QO5UKc00P6hktfdt');
+const stripe = require('stripe')(process.env.API_STRIPE_SECRET_KEY);
 
 class ListCustomer {
     async customerList(req:Request, res:Response) {

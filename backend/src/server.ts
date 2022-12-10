@@ -6,9 +6,6 @@ import * as dotenv from 'dotenv'
 import { router } from './routes'
 dotenv.config()
 
-const stripe = require('stripe')('sk_test_51MCsigDXO8lGdsO055v4StRAuJvuMloJpnbrzPBdPNz7Mx310tglUPwtKFY8ugG8CDfe25BSZGvE7d5xk4QO5UKc00P6hktfdt');
-const YOUR_DOMAIN = 'http://localhost:3001/';
-
 const app = express()
 
 app.use(express.json())
