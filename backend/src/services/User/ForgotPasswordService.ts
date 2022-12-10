@@ -13,6 +13,7 @@ interface Email {
 
 class ForgotPasswordService {
     async execute(email: string) {
+        //console.log(email)
         const user = await prismaClient.user.findFirst({ where: { email_usuario: email } })
 
         if (!user) {
@@ -45,7 +46,7 @@ class ForgotPasswordService {
 
             const url = `https://supertips.com.br/reset_password/${token}`
 
-            const info = await transporter.sendMail({
+            await transporter.sendMail({
                 from: '"Super Tips" <contato@supertips.com.br>', // sender address
                 to: email, // list of receivers
                 subject: "Altere sua senha", // Subject line

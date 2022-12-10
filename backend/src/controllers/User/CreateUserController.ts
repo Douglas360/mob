@@ -3,10 +3,10 @@ import { CreateUserService } from "../../services/User/CreateUserService"
 import { verify } from 'jsonwebtoken'
 
 interface JwtPayload {
-    id_usuario: number
-  }
+   email_usuario: string
+}
 class CreateUserController {
-    
+
 
     async handle(req: Request, res: Response) {
         const { name, email, password } = req.body
@@ -24,11 +24,11 @@ class CreateUserController {
 
     async verifyEmail(req: Request, res: Response) {
         try {
-            const {id_usuario} = verify(req.params.token, 'k@') as JwtPayload
-            const id = id_usuario
+            const { email_usuario } = verify(req.params.token, 'k@') as JwtPayload
+            const email = email_usuario
             const createUserService = new CreateUserService()
             await createUserService.update({
-                id
+                email
             })
 
 
@@ -44,7 +44,7 @@ class CreateUserController {
         try {
             const { id_usuario, name, email, password } = req.body
             const id = Number(id_usuario)
-          
+
 
             const createUserService = new CreateUserService()
             const user = await createUserService.updateUser({
@@ -59,8 +59,24 @@ class CreateUserController {
 
 
         } catch (error) {
-             throw error
+            throw error
 
+        }
+    }
+
+    async sendEmail(req: Request, res: Response) {
+        try {
+            const { email } = req.body
+            const createUserService = new CreateUserService()
+            const user = await createUserService.sendEmailConfirmation({
+                email
+
+            })
+
+            return res.json("Email enviado com sucesso");
+
+        } catch (error) {
+            throw error
         }
     }
 

@@ -22,6 +22,10 @@ interface Verify {
     id: number
 }
 
+interface Send {
+    email: string
+}
+
 class CreateUserService {
 
     async execute({ name, email, password }: UserRequest) {
@@ -56,46 +60,46 @@ class CreateUserService {
             }
         })
 
-        const tokenEmail = sign(
-            {
-                id_usuario: user.id_usuario,
-                email_usuario: user.email_usuario
-            },//process.env.JWT_SECRET
-            'k@',
-            {
-                expiresIn: '1d'
-            })
+        /*     const tokenEmail = sign(
+                 {
+                     id_usuario: user.id_usuario,
+                     email_usuario: user.email_usuario
+                 },//process.env.JWT_SECRET
+                 'k@',
+                 {
+                     expiresIn: '1d'
+                 })
+     
+             const url = `https://supertips.com.br/confirmation/${tokenEmail}`
+     
+              let transporter = nodemailer.createTransport({
+                  host: "smtp.umbler.com",
+                  port: 587,
+                  secure: false, // true for 465, false for other ports
+                  auth: {
+                      user: 'contato@supertips.com.br', // generated ethereal user
+                      pass: 'a12345@@' // generated ethereal password
+                  },
+              });
+      
+              await transporter.sendMail({
+                  from: '"Super Tips" <contato@supertips.com.br>', // sender address
+                  to: email, // list of receivers
+                  subject: "Ative sua conta", // Subject line
+                  html: `Confirme no link para ativar sua conta: <a href="${url}">Aqui</a>`,
+                  text: `Clique no link para ativar sua conta: <a href="${url}">Aqui</a>`
+              });
+     */
 
-        const url = `https://supertips.com.br/confirmation/${tokenEmail}`
-
-         let transporter = nodemailer.createTransport({
-             host: "smtp.umbler.com",
-             port: 587,
-             secure: false, // true for 465, false for other ports
-             auth: {
-                 user: 'contato@supertips.com.br', // generated ethereal user
-                 pass: 'a12345@@' // generated ethereal password
-             },
-         });
- 
-         await transporter.sendMail({
-             from: '"Super Tips" <contato@supertips.com.br>', // sender address
-             to: email, // list of receivers
-             subject: "Ative sua conta", // Subject line
-             html: `Confirme no link para ativar sua conta: <a href="${url}">Aqui</a>`,
-             text: `Clique no link para ativar sua conta: <a href="${url}">Aqui</a>`
-         });
-
-        
         return user
     }
 
-    async update({ id }: Verify) {
+    async update({ email }: Send) {
 
 
         const verifyEmail = await prismaClient.user.update({
             where: {
-                id_usuario: id
+                email_usuario: email
             },
             data: {
                 verificado: 1
@@ -125,6 +129,39 @@ class CreateUserService {
         })
 
         return updateUser
+
+    }
+
+    async sendEmailConfirmation({ email }: Send) {
+        const tokenEmail = sign(
+            {
+
+                email_usuario: email
+            },//process.env.JWT_SECRET
+            'k@',
+            {
+                expiresIn: '1d'
+            })
+
+        const url = `https://supertips.com.br/confirmation/${tokenEmail}`
+
+        let transporter = nodemailer.createTransport({
+            host: "smtp.umbler.com",
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: 'contato@supertips.com.br', // generated ethereal user
+                pass: 'a12345@@' // generated ethereal password
+            },
+        });
+
+        await transporter.sendMail({
+            from: '"Super Tips" <contato@supertips.com.br>', // sender address
+            to: email, // list of receivers
+            subject: "Ative sua conta", // Subject line
+            html: `Confirme no link para ativar sua conta: <a href="${url}">Aqui</a>`,
+            text: `Clique no link para ativar sua conta: <a href="${url}">Aqui</a>`
+        });
 
     }
 

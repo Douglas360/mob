@@ -1,4 +1,4 @@
-import { Request, response, Response } from 'express'
+import { Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 import { ListResultService } from '../../services/Jogo/ListResultService'
 

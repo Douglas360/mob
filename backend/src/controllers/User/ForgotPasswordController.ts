@@ -9,7 +9,7 @@ interface JwtPayload {
 class ForgotPasswordController {
     async handle(req: Request, res: Response) {
         const { email } = req.body
-
+        console.log(email)
 
         const forgotPassword = new ForgotPasswordService()
 

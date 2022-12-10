@@ -6,6 +6,8 @@ import { ListResultController } from './controllers/Jogo/ListResultController'
 import { AuthUserController } from './controllers/User/AuthUserController'
 import { HealthCheck } from './config/healthCheck'
 
+import { CheckoutController } from './controllers/Checkout/CheckoutController'
+import { ListCustomer } from './stripe/ListCustomer'
 
 
 import { auth } from './middlewares/auth'
@@ -26,6 +28,13 @@ router.get('/result/euro/:minuto', new ListResultController().handle_euro)
 router.get('/result/copa/:minuto', new ListResultController().handle_copa)
 router.get('/result/premier/:minuto', new ListResultController().handle_premier)
 router.get('/result/super/:minuto', new ListResultController().handle_super)
+router.post('/send_email', new CreateUserController().sendEmail)
+
+router.post('/create-checkout-session', new CheckoutController().execute)
+router.get('/v1/customers',new ListCustomer().execute)
+router.get('/v1/customers/search',new ListCustomer().search)
+
+
 
 
 
