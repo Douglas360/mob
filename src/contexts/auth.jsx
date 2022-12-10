@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
     const checkout = async (name, email) => {
         try {
-            const res = await fetch(`http://localhost:3001/create-checkout-session`, {
+            const res = await fetch(`https://api.supertips.com.br/create-checkout-session`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',

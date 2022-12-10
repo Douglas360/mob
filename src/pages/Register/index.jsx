@@ -103,7 +103,7 @@ export default function SignUp() {
                                 label="Email"
                                 name="email"
                                 autoComplete="email"
-                                autoFocus
+                                
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField
