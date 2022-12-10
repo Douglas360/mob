@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
-import { verify } from 'jsonwebtoken'
+
 import { ListResultService } from '../../services/Jogo/ListResultService'
 
 class ListResultController {
     async handle_euro(req: Request, res: Response) {
-        //verify(req.params.token, 'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx')
+      
         const minuto = req.params.minuto
 
         const listResultService = new ListResultService()
