@@ -15,7 +15,8 @@ export const formatTableData = (items, mercados, liga) => {
 
   // Padroniza cada linha da tabela em 20 itens
   const filledItems = coloredItems.map(({ hora, items }) => {
-    const parsedHora = hora === '1.' ? '1' : hora === '2.' ? '2' : hora;
+    const parsedHora =
+      hora === '1.' ? '01' : hora === '2.' ? '02' : hora.padStart(2, '0');
 
     if (items.length < 20) {
       // Cria array de 20 posições com minuto jogo de cada coluna da tabela
@@ -51,6 +52,8 @@ export const formatTableData = (items, mercados, liga) => {
 
   // Ordena os items por minuto do jogo
   const sortedItemsByMinutoJogo = sortItemsByMinutoJogo(filledItems);
+
+  console.log({ sortedItemsByMinutoJogo });
 
   return sortedItemsByMinutoJogo;
 };
