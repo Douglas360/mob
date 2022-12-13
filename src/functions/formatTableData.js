@@ -53,7 +53,5 @@ export const formatTableData = (items, mercados, liga) => {
   // Ordena os items por minuto do jogo
   const sortedItemsByMinutoJogo = sortItemsByMinutoJogo(filledItems);
 
-  console.log({ sortedItemsByMinutoJogo });
-
   return sortedItemsByMinutoJogo;
 };
