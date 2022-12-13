@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { ListResultService } from '../../services/Jogo/ListResultService'
+import { ListResultService } from '../../services/JogoBet365/ListResultService'
 
 class ListResultController {
     async handle_euro(req: Request, res: Response) {

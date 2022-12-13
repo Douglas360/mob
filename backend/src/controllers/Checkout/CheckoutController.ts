@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 
 const stripe = require('stripe')(process.env.API_STRIPE_SECRET_KEY);
 const YOUR_DOMAIN = 'https://supertips.com.br';
+//const YOUR_DOMAIN = 'http://localhost:3000';
 
 class CheckoutController {
     async execute(req: Request, res: Response) {
@@ -17,10 +18,14 @@ class CheckoutController {
                 line_items: [
                     {
                         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                        price: 'price_1MDa6XDXO8lGdsO0TRL12Nm6',
+                        price: 'price_1MEVqqDXO8lGdsO0HbU2tU7X',
                         quantity: 1,
                     },
                 ],
+                subscription_data: {
+                    trial_period_days: 7,
+                  },
+                allow_promotion_codes: true,
               
                 mode: 'subscription',
                 customer: customer.id,
