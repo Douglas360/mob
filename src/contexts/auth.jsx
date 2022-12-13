@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { api } from "../services/api"
+import { Urldomanin } from "../services/api"
 
 export const AuthContext = createContext()
 
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
     const checkout = async (name, email) => {
         try {
-            const res = await fetch(`http://localhost:3000/create-checkout-session`, {
+            const res = await fetch(`${Urldomanin}/create-checkout-session`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
