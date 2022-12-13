@@ -54,7 +54,7 @@ export const AppRouter = () => {
             exact
             element={
              
-                <Home />
+                <SignIn />
              
 
             }
