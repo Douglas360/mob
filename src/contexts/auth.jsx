@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token')
 
         if (recoveredUser && token) {
+            console.log(recoveredUser)
             setUser(JSON.parse(recoveredUser))
             /* localStorage.setItem("token", token, {
                  path: "/"

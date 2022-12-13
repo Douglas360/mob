@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -51,7 +50,7 @@ export default function ForgotPassword() {
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
+                
                 <Grid
                     item
                     xs={false}
@@ -61,7 +60,7 @@ export default function ForgotPassword() {
                         backgroundImage: 'url(https://supertips.com.br/static/media/logo.c348e004ed178a7c2b62.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
-                             t.palette.grey[900],                        
+                             t.palette.black,                        
                         backgroundPosition: 'center',
                     }}
                 />

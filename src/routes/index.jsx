@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { AuthProvider } from '../contexts/auth';
+import { Home } from '../pages/Home';
 import { Dashboard } from '../pages/Dashboard';
 import { Betfair } from '../pages/Dashboard/Betfair';
 import { Betano } from '../pages/Dashboard/Betano';
@@ -30,7 +31,7 @@ export const AppRouter = () => {
     }
 
     if (!autenticado) {
-      return <Navigate to="/" />;
+      return <Navigate to="/login" />;
     }
 
     return children;
@@ -50,6 +51,16 @@ export const AppRouter = () => {
         <Routes>
           <Route
             path="/"
+            exact
+            element={
+             
+                <Home />
+             
+
+            }
+          />
+          <Route
+            path="/login"
             exact
             element={
               <Autenticado>

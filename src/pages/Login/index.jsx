@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -16,14 +15,13 @@ import { toast } from 'react-toastify'
 import { Copyright } from '../../components/LayoutComponents/Copyright';
 import { useAuth } from '../../contexts/useAuth';
 
-
 const theme = createTheme();
 
 
 export default function SignIn() {
 
     //const { login } = useContext(AuthContext)
-    const {login} = useAuth()
+    const { login } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -50,7 +48,7 @@ export default function SignIn() {
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
+
                 <Grid
                     item
                     xs={false}
@@ -60,11 +58,17 @@ export default function SignIn() {
                         backgroundImage: 'url(https://supertips.com.br/static/media/logo.c348e004ed178a7c2b62.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
-                             t.palette.grey[900],                        
+                            t.palette.black,
                         backgroundPosition: 'center',
+
                     }}
-                />
+                >
+                    
+                    
+
+                </Grid>
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+
                     <Box
                         sx={{
                             my: 8,
@@ -111,6 +115,7 @@ export default function SignIn() {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                
                                 sx={{ mt: 3, mb: 2 }}
 
                             >
