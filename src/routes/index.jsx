@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,8 +6,10 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import { AuthProvider, AuthContext } from '../contexts/auth';
+import { AuthProvider } from '../contexts/auth';
 import { Dashboard } from '../pages/Dashboard';
+import { Betfair } from '../pages/Dashboard/Betfair';
+import { Betano } from '../pages/Dashboard/Betano';
 import SignIn from '../pages/Login';
 import SignUp from '../pages/Register';
 import { UserProfile } from '../pages/Profile/UserProfile';
@@ -15,27 +17,17 @@ import { UserSubscription } from '../pages/Profile/UserSubscription';
 import ForgotPassword from '../pages/Login/forgotPassword';
 import { UserConfirmation } from '../pages/Profile/UserConfirmation';
 import { SuccessPage } from '../pages/Register/success';
+import { useAuth } from '../contexts/useAuth';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 
 export const AppRouter = () => {
   const Private = ({ children }) => {
-    const { autenticado } = useContext(AuthContext);
-    /*    if (carregando) {
-                return (
-    
-                    <div className="carregando" align="center">
-                        <ColorRing
-                            visible={true}
-                            height="80"
-                            width="80"
-                            ariaLabel="blocks-loading"
-                            wrapperStyle={{}}
-                            wrapperClass="blocks-wrapper"
-                            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-                        />
-    
-                    </div>)
-            }*/
+    const { autenticado, loading } = useAuth()
+
+    if (loading) {
+      return <LoadingSpinner />
+    }
 
     if (!autenticado) {
       return <Navigate to="/" />;
@@ -63,6 +55,7 @@ export const AppRouter = () => {
               <Autenticado>
                 <SignIn />
               </Autenticado>
+
             }
           />
           <Route
@@ -86,6 +79,22 @@ export const AppRouter = () => {
             element={
               <Private>
                 <Dashboard />
+              </Private>
+            }
+          />
+          <Route
+            path="/betfair"
+            element={
+              <Private>
+                <Betfair />
+              </Private>
+            }
+          />
+          <Route
+            path="/betano"
+            element={
+              <Private>
+                <Betano />
               </Private>
             }
           />

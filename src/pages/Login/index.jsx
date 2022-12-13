@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify'
 import { Copyright } from '../../components/LayoutComponents/Copyright';
-import { AuthContext } from '../../contexts/auth'
+import { useAuth } from '../../contexts/useAuth';
 
 
 const theme = createTheme();
@@ -22,7 +22,8 @@ const theme = createTheme();
 
 export default function SignIn() {
 
-    const { login } = useContext(AuthContext)
+    //const { login } = useContext(AuthContext)
+    const {login} = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,8 +12,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify'
 import { Copyright } from '../../components/LayoutComponents/Copyright';
-import { AuthContext } from '../../contexts/auth'
 import { Loading } from '../../components/LayoutComponents/Loading';
+import { useAuth } from '../../contexts/useAuth';
 
 
 const theme = createTheme();
@@ -21,7 +21,8 @@ const theme = createTheme();
 
 export default function ForgotPassword() {
 
-    const { resetPasswod, loadRegister } = useContext(AuthContext)
+    //const { resetPasswod, loadRegister } = useContext(AuthContext)
+    const {resetPasswod, loadRegister} = useAuth()
     
     const [email, setEmail] = useState('')
     

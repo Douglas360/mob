@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { api } from "../services/api"
 
-
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
@@ -12,7 +11,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loadRegister, setLoadRegister] = useState(true)
     const [loadUpdate, setUpdate] = useState(false)
-
+    const autenticado = !!user;
+    const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
@@ -21,21 +21,23 @@ export const AuthProvider = ({ children }) => {
 
         const token = localStorage.getItem('token')
 
-        if (recoveredUser) {
+        if (recoveredUser && token) {
             setUser(JSON.parse(recoveredUser))
-            localStorage.setItem("token", token, {
-                path: "/"
-            })
+            /* localStorage.setItem("token", token, {
+                 path: "/"
+             })*/
+            api.defaults.headers['Authorization'] = `Bearer ${token}`
 
 
         }
 
+        setLoading(false)
 
     }, [])
 
     const checkout = async (name, email) => {
         try {
-            const res = await fetch(`https://api.supertips.com.br/create-checkout-session`, {
+            const res = await fetch(`http://localhost:3000/create-checkout-session`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
@@ -77,7 +79,7 @@ export const AuthProvider = ({ children }) => {
             api.defaults.headers['Authorization'] = `Bearer ${token}` //Passando token para todas as requisições
 
             //console.log(usuariologado["name"])
-            setUser({ usuariologado })
+            setUser(usuariologado)
 
             toast.success('Logado com sucesso!', {
                 position: "top-center",
@@ -323,7 +325,7 @@ export const AuthProvider = ({ children }) => {
 
 
             })
-           
+
         } catch (error) {
             console.log(error)
             toast.error('Erro! Tente novamente', {
@@ -342,8 +344,7 @@ export const AuthProvider = ({ children }) => {
     return (
 
         <AuthContext.Provider value={{
-            autenticado:
-                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, resetPasswod, UserConfirmation, sendEmail
+            autenticado, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, loading, resetPasswod, UserConfirmation, sendEmail
         }}>
 
             {children}

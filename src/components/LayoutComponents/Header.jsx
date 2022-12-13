@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom'
 
 
 const navigation = [
-    { name: 'BET 365', href: '#', current: true },
-    { name: 'Betano', href: '#', current: false },
-    { name: 'BetFair', href: '#', current: false },
+    { name: 'BET 365', href: '/', current: true },
+    { name: 'BetFair', href: '/betfair', current: false },
+    { name: 'Betano', href: '/betano', current: false },
 
 ]
 
@@ -50,11 +50,12 @@ export function Header() {
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
-                                    <img
+                                    <a href='/'> <img
                                         className="h-20 w-30"
                                         src={logo}
-                                        alt="Your Company"
+                                        alt="Super Tips"
                                     />
+                                    </a>
                                 </div>
                                 <div className="hidden md:block">
                                     <div className="ml-10 flex items-baseline space-x-4">
