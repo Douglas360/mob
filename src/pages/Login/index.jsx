@@ -55,7 +55,7 @@ export default function SignIn() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://supertips.com.br/static/media/logo.c348e004ed178a7c2b62.png)',
+                        backgroundImage: 'url(https://supertips.com.br/static/media/supertips.02f025c11529dddd3938.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.black,
