@@ -133,10 +133,10 @@ class CreateUserService {
             {
 
                 email_usuario: email
-            },//process.env.JWT_SECRET
-            'k@',
+            },process.env.JWT_SECRET!,
+            //'k@',
             {
-                expiresIn: '1d'
+                expiresIn: '1h'
             })
 
         const url = `https://supertips.com.br/confirmation/${tokenEmail}`

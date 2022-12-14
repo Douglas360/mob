@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-const authConfig = require('../config/auth')
+
 interface Payload {
     sub: string
 }
