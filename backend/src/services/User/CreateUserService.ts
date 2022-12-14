@@ -133,8 +133,8 @@ class CreateUserService {
             {
 
                 email_usuario: email
-            },//process.env.JWT_SECRET
-            'k@',
+            },process.env.JWT_SECRET,
+            //'k@',
             {
                 expiresIn: '1d'
             })
