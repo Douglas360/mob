@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 const authConfig = require('../config/auth')
-interface Payload{
+interface Payload {
     sub: string
 }
 
@@ -9,25 +9,25 @@ export function auth(
     req: Request,
     res: Response,
     next: NextFunction
-){
+) {
     //receber o token
     const authToken = req.headers.authorization
-
-    if(!authToken){
+    
+    if (!authToken) {
         return res.status(401).json({ error: 'Token was not provided' }).end()
 
-    } 
+    }
 
-    
-    const[, token] = authToken.split(" ")
+
+    const [, token] = authToken.split(" ")
 
     //validar token
     try {
-        const {sub} =  verify(
-            token, 
-          
+        verify(
+            token,
+
             authConfig.secret
-            
+
         ) as Payload
 
         //REcuperar o id do token e colocar em uma variavel req.id_user
@@ -36,6 +36,6 @@ export function auth(
         return next()
 
     } catch (error) {
-        return res.status(401).json({ ERROR: "Invalid Token" }).end()        
+        return res.status(601).json({  error: 'Invalid Token' }).end()
     }
 }

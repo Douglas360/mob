@@ -10,10 +10,6 @@ interface AuthRequest {
     email: string;
     password: string
 }
-interface Token {
-    token: string
-}
-
 
 class AuthUserService {
     async execute({ email, password }: AuthRequest) {
@@ -66,7 +62,7 @@ class AuthUserService {
             },//process.env.JWT_SECRET
             'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx',
             {
-                expiresIn: '120s'
+                expiresIn: '30d'
             }
 
         )

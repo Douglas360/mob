@@ -5,6 +5,7 @@ import { CreateUserController } from './controllers/User/CreateUserController'
 import { ListResultController } from './controllers/JogoBet365/ListResultController'
 import { ListResultControllerBetfair } from './controllers/JogoBetfair/ListResultController'
 import { AuthUserController } from './controllers/User/AuthUserController'
+import { VerifyUserController } from './controllers/User/VerifyUserController'
 import { HealthCheck } from './config/healthCheck'
 
 import { CheckoutController } from './controllers/Checkout/CheckoutController'
@@ -26,7 +27,7 @@ router.post('/profile/update', new CreateUserController().updateUser)
 router.post('/create', new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
 router.post('/send_email', new CreateUserController().sendEmail)
-
+router.get('/verifyuser',auth, new VerifyUserController().handle)
 
 
 router.get('/result/euro/:minuto',  new ListResultController().handle_euro)
