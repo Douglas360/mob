@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer");
 import { hash } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import prismaClient from "../../prisma";
-const crypto = require("crypto")
 
 interface Email {
     email: string
@@ -38,10 +37,10 @@ class ForgotPasswordService {
                 {
                     id_usuario: user.id_usuario,
                     email_usuario: user.email_usuario
-                },//process.env.JWT_SECRET
-                'k@',
+                },process.env.JWT_SECRET!,
+                //'k@',
                 {
-                    expiresIn: '1d'
+                    expiresIn: '1h'
                 })
 
             const url = `https://supertips.com.br/reset_password/${token}`
