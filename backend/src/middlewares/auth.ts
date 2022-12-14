@@ -26,7 +26,7 @@ export function auth(
         verify(
             token,
 
-            process.env.JWT_SECRET
+            process.env.JWT_SECRET!
 
         ) as Payload
 
