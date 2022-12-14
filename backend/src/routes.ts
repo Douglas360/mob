@@ -1,4 +1,4 @@
-import {Router, Request, Response} from 'express'
+import { Router, Request, Response } from 'express'
 
 import { ForgotPasswordController } from './controllers/User/ForgotPasswordController'
 import { CreateUserController } from './controllers/User/CreateUserController'
@@ -27,29 +27,29 @@ router.post('/profile/update', new CreateUserController().updateUser)
 router.post('/create', new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
 router.post('/send_email', new CreateUserController().sendEmail)
-router.get('/verifyuser',auth, new VerifyUserController().handle)
+router.get('/verifyuser', auth, new VerifyUserController().handle)
 
 
-router.get('/result/euro/:minuto',  new ListResultController().handle_euro)
-router.get('/result/copa/:minuto',  new ListResultController().handle_copa)
-router.get('/result/premier/:minuto',  new ListResultController().handle_premier)
-router.get('/result/super/:minuto',  new ListResultController().handle_super)
+router.get('/result/euro/:minuto', new ListResultController().handle_euro)
+router.get('/result/copa/:minuto', new ListResultController().handle_copa)
+router.get('/result/premier/:minuto', new ListResultController().handle_premier)
+router.get('/result/super/:minuto', new ListResultController().handle_super)
 
-router.get('/result/betfair/euro/:minuto',  new ListResultControllerBetfair().handle_euro)
-router.get('/result/betfair/copa/:minuto',  new ListResultControllerBetfair().handle_copa)
-router.get('/result/betfair/premier/:minuto',  new ListResultControllerBetfair().handle_premier)
-router.get('/result/betfair/seriea/:minuto',  new ListResultControllerBetfair().handle_serieA)
-router.get('/result/betfair/champions/:minuto',  new ListResultControllerBetfair().handle_champions)
+router.get('/result/betfair/euro/:minuto', new ListResultControllerBetfair().handle_euro)
+router.get('/result/betfair/copa/:minuto', new ListResultControllerBetfair().handle_copa)
+router.get('/result/betfair/premier/:minuto', new ListResultControllerBetfair().handle_premier)
+router.get('/result/betfair/seriea/:minuto', new ListResultControllerBetfair().handle_serieA)
+router.get('/result/betfair/champions/:minuto', new ListResultControllerBetfair().handle_champions)
 
 
 
 router.post('/create-checkout-session', new CheckoutController().execute)
-router.get('/v1/customers',new ListCustomer().customerList)
-router.get('/v1/customers/search',new ListCustomer().customerSearch)
+router.get('/v1/customers', new ListCustomer().customerList)
+router.get('/v1/customers/search', new ListCustomer().customerSearch)
 router.get('/v1/subscriptions', new ListSubscription().subscriptionList)
 router.get('/v1/subscriptions/search', new ListSubscription().subscriptionSearch)
 
 
 
 
-export {router}
+export { router }

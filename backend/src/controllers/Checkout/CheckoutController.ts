@@ -24,9 +24,9 @@ class CheckoutController {
                 ],
                 subscription_data: {
                     trial_period_days: 7,
-                  },
+                },
                 allow_promotion_codes: true,
-              
+
                 mode: 'subscription',
                 customer: customer.id,
                 success_url: `${YOUR_DOMAIN}/success/${email}`,
