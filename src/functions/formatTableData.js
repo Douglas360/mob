@@ -27,7 +27,9 @@ export const formatTableData = (items, mercados, liga) => {
         }));
 
       const newItems = columns.map(col => {
-        const item = items.find(item => item.minuto_jogo === col.minuto_jogo);
+        const item = items.find(
+          item => item.minuto_jogo?.padStart(5, '0') === col.minuto_jogo,
+        );
 
         if (!item) {
           const isPending =
