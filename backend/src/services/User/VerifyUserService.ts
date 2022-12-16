@@ -20,7 +20,7 @@ class VerifyUserService {
 
         })
 
-        if (verifyUser.validate ) {
+        if (verifyUser.validate! ) {
             throw new Error("Payment is not found");           
 
         }
