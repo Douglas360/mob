@@ -20,9 +20,12 @@ class VerifyUserService {
 
         })
 
-        if(!verifyUser){
+        if (!verifyUser) {
             throw new Error("Error");
-            
+        } else if (verifyUser.validate < new Date(today)) {
+            //new Date(moment().format('YYYY-MM-DD'))!=null)
+            throw new Error("Payment is not found")
+
         }
 
 
