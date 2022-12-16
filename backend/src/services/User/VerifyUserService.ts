@@ -1,4 +1,7 @@
 import prismaClient from "../../prisma"
+import moment from 'moment';
+
+const today = (moment().format("YYYY-MM-DD"))
 
 interface VerifyUser {
     email: string
@@ -8,23 +11,25 @@ interface VerifyUser {
 class VerifyUserService {
 
     async execute({ email }: VerifyUser) {
-        try {
-
-            const verifyUser = await prismaClient.user.findFirst({
-                where: {
-                    email_usuario: email
-                }
-
-            })
 
 
-            return verifyUser
-        }
-        catch (error) {
-            console.log(error)
+        const verifyUser = await prismaClient.user.findFirst({
+            where: {
+                email_usuario: email
+            }
 
+        })
+
+        if (verifyUser.validate < new Date(today)) {
+            throw new Error("Payment is not found");           
 
         }
+
+
+
+        return verifyUser
+
+
     }
 }
 export { VerifyUserService }

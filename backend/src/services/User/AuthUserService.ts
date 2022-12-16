@@ -17,7 +17,7 @@ class AuthUserService {
         const user = await prismaClient.user.findFirst({ where: { email_usuario: email } })
 
         if (!user) {
-            throw new Error("User/Password incorrect");
+            throw new Error("User - Password incorrect");
 
         }
 
