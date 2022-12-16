@@ -20,7 +20,7 @@ class VerifyUserService {
 
         })
 
-        if (verifyUser.validate < new Date(today)!) {
+        if (verifyUser.validate! < new Date(today)!) {
             throw new Error("Payment is not found");           
 
         }
