@@ -1,7 +1,7 @@
 import prismaClient from "../../prisma"
 import moment from 'moment';
 
-const today = (moment().format("YYYY-MM-DD"))
+const today = (moment().format("YYYY-MM-DD"))!
 
 interface VerifyUser {
     email: string
@@ -18,9 +18,9 @@ class VerifyUserService {
                 email_usuario: email
             }
 
-        })
+        })!
 
-        if (verifyUser.validate! < new Date(today)!) {
+        if (verifyUser.validate < new Date(today)) {
             throw new Error("Payment is not found");           
 
         }
