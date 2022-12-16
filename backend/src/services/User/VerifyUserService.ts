@@ -20,8 +20,9 @@ class VerifyUserService {
 
         })
 
-        if (verifyUser.validate! ) {
-            throw new Error("Payment is not found");           
+        if (verifyUser.validate < new Date(moment().format('YYYY-MM-DD'))) {
+            //new Date(moment().format('YYYY-MM-DD'))!=null)
+            throw new Error("UsuárioExpirado")
 
         }
 
