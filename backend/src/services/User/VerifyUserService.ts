@@ -20,10 +20,9 @@ class VerifyUserService {
 
         })
 
-        if (verifyUser.validate < new Date(moment().format('YYYY-MM-DD'))) {
-            //new Date(moment().format('YYYY-MM-DD'))!=null)
-            throw new Error("UsuárioExpirado")
-
+        if(!verifyUser){
+            throw new Error("Error");
+            
         }
 
 
