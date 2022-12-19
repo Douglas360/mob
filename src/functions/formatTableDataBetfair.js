@@ -3,7 +3,7 @@ import { getHourNow } from './getHourNow';
 import { setTableCellBackgroundColor } from './setTableCellBackgroundColor';
 import { sortItemsByMinutoJogo } from './sortItemsByMinutoJogo';
 
-export const formatTableData = (items, mercados, liga) => {
+export const formatTableDataBetfair = (items, mercados, liga) => {
   if (!items) {
     return [];
   }
@@ -15,21 +15,18 @@ export const formatTableData = (items, mercados, liga) => {
 
   // Padroniza cada linha da tabela em 20 itens
   const filledItems = coloredItems.map(({ hora, items }) => {
-    const parsedHora =
-      hora === '1.' ? '01' : hora === '2.' ? '02' : hora.padStart(2, '0');
+    const parsedHora = hora === '01.' ? '1' : hora === '02.' ? '2' : hora;
 
     if (items.length < 20) {
       // Cria array de 20 posições com minuto jogo de cada coluna da tabela
       const columns = tableColumns[liga]
         .filter(col => col.value !== 'Hora' && col.value !== 'Dados')
         .map(col => ({
-          minuto_jogo: parsedHora + `.${String(col.value).padStart(2, '0')}`,
+          minuto_jogo: parsedHora + `:${String(col.value).padStart(2, '0')}`,
         }));
 
       const newItems = columns.map(col => {
-        const item = items.find(
-          item => item.minuto_jogo?.padStart(5, '0') === col.minuto_jogo,
-        );
+        const item = items.find(item => item.minuto_jogo === col.minuto_jogo);
 
         if (!item) {
           const isPending =

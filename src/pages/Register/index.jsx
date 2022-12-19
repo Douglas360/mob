@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -50,7 +49,7 @@ export default function SignUp() {
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
+                
                 <Grid
                     item
                     xs={false}
@@ -60,7 +59,7 @@ export default function SignUp() {
                         backgroundImage: 'url(https://supertips.com.br/static/media/logo.c348e004ed178a7c2b62.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
-                             t.palette.grey[900],                        
+                             t.palette.black,                        
                         backgroundPosition: 'center',
                     }}
                 />
@@ -103,7 +102,7 @@ export default function SignUp() {
                                 label="Email"
                                 name="email"
                                 autoComplete="email"
-                                autoFocus
+                                
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { api } from "../services/api"
-
+import { Urldomanin } from "../services/api"
 
 export const AuthContext = createContext()
 
@@ -12,7 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loadRegister, setLoadRegister] = useState(true)
     const [loadUpdate, setUpdate] = useState(false)
-
+    const autenticado = !!user;
+    const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
@@ -21,18 +22,43 @@ export const AuthProvider = ({ children }) => {
 
         const token = localStorage.getItem('token')
 
-        if (recoveredUser) {
+        if (recoveredUser && token) {
+            console.log(recoveredUser)
             setUser(JSON.parse(recoveredUser))
-            localStorage.setItem("token", token, {
-                path: "/"
-            })
+            /* localStorage.setItem("token", token, {
+                 path: "/"
+             })*/
+            api.defaults.headers['Authorization'] = `Bearer ${token}`
 
 
         }
 
+        setLoading(false)
 
     }, [])
 
+    const checkout = async (name, email) => {
+        try {
+            const res = await fetch(`${Urldomanin}/create-checkout-session`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email
+                })
+            })
+            const body = await res.json()
+
+
+            window.location.href = body.url
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const login = async ({ email, password }) => {
 
@@ -55,7 +81,7 @@ export const AuthProvider = ({ children }) => {
             api.defaults.headers['Authorization'] = `Bearer ${token}` //Passando token para todas as requisições
 
             //console.log(usuariologado["name"])
-            setUser({ usuariologado })
+            setUser(usuariologado)
 
             toast.success('Logado com sucesso!', {
                 position: "top-center",
@@ -151,17 +177,19 @@ export const AuthProvider = ({ children }) => {
 
 
             }).then((response) => {
-                toast.success('Validar Email para acessar o sistema ', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                /* toast.success('Validar Email para acessar o sistema ', {
+                     position: "top-center",
+                     autoClose: 5000,
+                     hideProgressBar: false,
+                     closeOnClick: true,
+                     pauseOnHover: true,
+                     draggable: true,
+                     progress: undefined,
+                 });*/
 
-                navigate("/")
+                checkout(name, email)
+
+                //  navigate("/")
             })
 
 
@@ -235,8 +263,8 @@ export const AuthProvider = ({ children }) => {
         navigate("/")
     }
 
-    const resetPasswod = async ( email ) => {
-        
+    const resetPasswod = async (email) => {
+
         try {
             console.log(email)
             api.get('forgot', {
@@ -270,9 +298,9 @@ export const AuthProvider = ({ children }) => {
 
     const UserConfirmation = async (token) => {
         try {
-            
+
             api.get(`/confirmation/${token}`, {
-               
+
 
             })
         } catch (error) {
@@ -291,11 +319,34 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+    const sendEmail = async (email) => {
+        try {
+
+            api.post(`send_email`, {
+                email
+
+
+            })
+
+        } catch (error) {
+            console.log(error)
+            toast.error('Erro! Tente novamente', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+        }
+    }
+
     return (
 
         <AuthContext.Provider value={{
-            autenticado:
-                !!user, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, resetPasswod, UserConfirmation
+            autenticado, user, login, logout, createUser, updateUser, loadRegister, loadUpdate, loading, resetPasswod, UserConfirmation, sendEmail
         }}>
 
             {children}

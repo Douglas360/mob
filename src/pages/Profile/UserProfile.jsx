@@ -28,13 +28,13 @@ export function UserProfile() {
             email,
             password
         }
-        console.log(data)
-        //updateUser(data)
+        console.log(phone)
+        updateUser(data)
     }
 
     const { updateUser, user, loadUpdate } = useContext(AuthContext)
-    
-    const id_usuario =  Number(user.id_usuario)
+
+    const id_usuario = Number(user.id_usuario)
 
 
     return (
