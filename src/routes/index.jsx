@@ -20,6 +20,7 @@ import { UserConfirmation } from '../pages/Profile/UserConfirmation';
 import { SuccessPage } from '../pages/Register/success';
 import { useAuth } from '../contexts/useAuth';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { Home } from '../pages/Home';
 
 
 export const AppRouter = () => {
@@ -59,12 +60,12 @@ export const AppRouter = () => {
             exact
             element={
 
-              <SignIn />
+              <Home />
 
 
             }
           />
-          {/*<Route
+          <Route
             path="/login"
             exact
             element={
@@ -73,7 +74,7 @@ export const AppRouter = () => {
               </Autenticado>
 
             }
-          />*/}
+          />
           <Route
             path="/register"
             element={
