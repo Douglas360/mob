@@ -1,8 +1,8 @@
 import { Request, Response } from "express"
 
 const stripe = require('stripe')(process.env.API_STRIPE_SECRET_KEY);
-//const YOUR_DOMAIN = 'https://supertips.com.br';
-const YOUR_DOMAIN = 'http://localhost:3000';
+const YOUR_DOMAIN = 'https://supertips.com.br';
+//const YOUR_DOMAIN = 'http://localhost:3000';
 
 class CheckoutController {
     async execute(req: Request, res: Response) {
