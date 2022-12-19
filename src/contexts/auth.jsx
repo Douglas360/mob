@@ -23,11 +23,9 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token')
 
         if (recoveredUser && token) {
-            console.log(recoveredUser)
+
             setUser(JSON.parse(recoveredUser))
-            /* localStorage.setItem("token", token, {
-                 path: "/"
-             })*/
+            verifyUser()
             api.defaults.headers['Authorization'] = `Bearer ${token}`
 
 
@@ -61,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const login = async ({ email, password }) => {
+        setLoadRegister(false)
 
         try {
             const response = await api.post('session', {
@@ -96,7 +95,7 @@ export const AuthProvider = ({ children }) => {
             navigate("/dashboard")
 
 
-
+           
 
         } catch (error) {
 
@@ -167,7 +166,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const createUser = async ({ name, email, password }) => {
-        setLoadRegister(false)
+
 
         try {
             await api.post('create', {
@@ -191,10 +190,10 @@ export const AuthProvider = ({ children }) => {
 
                 //  navigate("/")
             })
-
+            setLoadRegister(false)
 
         } catch (error) {
-            setLoadRegister(false)
+
             console.log(error)
             toast.error('Usuario já Cadastrado!', {
                 position: "top-center",
@@ -205,6 +204,7 @@ export const AuthProvider = ({ children }) => {
                 draggable: true,
                 progress: undefined,
             });
+            setLoadRegister(false)
 
         }
 
@@ -340,6 +340,16 @@ export const AuthProvider = ({ children }) => {
                 progress: undefined,
             });
 
+        }
+    }
+
+    const verifyUser = async() =>{
+        try {
+            await api.post('verifyuser')
+        } catch (error) {
+            console.log("Error verify user")
+            logout()
+            
         }
     }
 

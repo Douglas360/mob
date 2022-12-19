@@ -10,18 +10,27 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify'
 import { Copyright } from '../../components/LayoutComponents/Copyright';
 import { useAuth } from '../../contexts/useAuth';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
+
 
 const theme = createTheme();
+
+const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: 'auto',
+});
 
 
 export default function SignIn() {
 
     //const { login } = useContext(AuthContext)
-    const { login } = useAuth()
+    const { login, loadRegister } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -55,16 +64,15 @@ export default function SignIn() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://supertips.com.br/static/media/supertips.02f025c11529dddd3938.png)',
-                        backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.black,
                         backgroundPosition: 'center',
 
                     }}
                 >
-                    
-                    
+                    <Img alt='Super Tips' src='https://i.ibb.co/3hQ1tct/Post-para-Instagram-Download-de-Ebook-Marketing-Digital-Colorido-roxo-e-laranja.png' />
+
+
 
                 </Grid>
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -115,12 +123,16 @@ export default function SignIn() {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                
+
                                 sx={{ mt: 3, mb: 2 }}
 
                             >
                                 ENTRAR
                             </Button>
+                            <div className='w-max h-max m-auto'>
+                                {!loadRegister &&
+                                    <LoadingSpinner />}
+                            </div>
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="/forgot" variant="body2">

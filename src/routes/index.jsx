@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { AuthProvider } from '../contexts/auth';
-import { Home } from '../pages/Home';
+//import { Home } from '../pages/Home';
 import { Dashboard } from '../pages/Dashboard';
 import { Betfair } from '../pages/Dashboard/Betfair';
 import { Betano } from '../pages/Dashboard/Betano';
@@ -27,7 +27,12 @@ export const AppRouter = () => {
     const { autenticado, loading } = useAuth()
 
     if (loading) {
-      return <LoadingSpinner />
+      return (
+        <div className='w-max h-max m-auto mt-64 items-center'>
+          <LoadingSpinner />
+
+        </div>
+      )
     }
 
     if (!autenticado) {
@@ -53,13 +58,13 @@ export const AppRouter = () => {
             path="/"
             exact
             element={
-             
-                <SignIn />
-             
+
+              <SignIn />
+
 
             }
           />
-          <Route
+          {/*<Route
             path="/login"
             exact
             element={
@@ -68,7 +73,7 @@ export const AppRouter = () => {
               </Autenticado>
 
             }
-          />
+          />*/}
           <Route
             path="/register"
             element={
