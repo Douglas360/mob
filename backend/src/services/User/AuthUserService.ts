@@ -62,7 +62,7 @@ class AuthUserService {
             },//process.env.JWT_SECRET
             'k@!.PYzB7KvODuEGIeJY!bnFFNvtm;Mx',
             {
-                expiresIn: '30d'
+                expiresIn: '30s'
             }
 
         )

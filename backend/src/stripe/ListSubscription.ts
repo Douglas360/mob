@@ -26,11 +26,15 @@ class ListSubscription {
     }
 
     async subscriptionSearch(req: Request, res: Response) {
+        const {email} = req.body 
+        
 
         try {
 
             const subscription = await stripe.subscriptions.search({
-                query: 'customer:\'cus_MxSlwxgCOGDmie\'',
+                //query: `metadata[\'email\']:\'${email}\'`,
+                query:'metadata[\'email\']:\'douglas123@email.com\''
+                
             });
 
 
