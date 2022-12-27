@@ -46,7 +46,7 @@ export const AppRouter = () => {
   const Autenticado = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
-      return <Navigate to="dashboard" />;
+      return <Navigate to="/git dashboard" />;
     }
     return children;
   };
@@ -67,7 +67,7 @@ export const AppRouter = () => {
           />
           <Route
             path="/login"
-            exact
+            
             element={
               <Autenticado>
                 <SignIn />
